@@ -1,4 +1,4 @@
-import {Navbar } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 
 
 function AppBar(props) {
@@ -10,9 +10,15 @@ function AppBar(props) {
       <div className="col-4">
         {props.name}
       </div>
-      <div className="col-4">
-        {props.element}
+      <div className="row col-4">
+        <div className="col-6">
+          {props.foodMenu}
+        </div>
+        <div className="col-6">
+          {props.element}
+        </div>
       </div>
+
     </Navbar>
   );
 }

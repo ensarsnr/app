@@ -5,10 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const itemsSlice = createSlice({
     name: 'items',
     initialState: {
-        elements: [
-            "Çay",
-            "Kahve"
-        ]
+        elements: []
     },
     reducers: {
         addItem: (state, action) => {
@@ -18,10 +15,10 @@ export const itemsSlice = createSlice({
             const indexToDelete = action.payload;
             state.elements.splice(indexToDelete, 1);
         },
-        
+
     }
 })
 
-export const {addItem, destroyItem} = itemsSlice.actions
+export const { addItem, destroyItem } = itemsSlice.actions
 
 export default itemsSlice.reducer
