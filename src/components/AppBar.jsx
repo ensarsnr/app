@@ -1,11 +1,11 @@
-import { Container, Navbar } from "react-bootstrap";
+import {Navbar } from "react-bootstrap";
 
 
 function AppBar(props) {
   return (
-    <Navbar expand="lg" variant="light" bg="light">
+    <Navbar expand="lg" variant="light" className="text-light" bg="dark">
       <div className="col-4 text-center">
-        <Navbar.Brand href="#">Navbar</Navbar.Brand>
+        <Navbar.Brand className="text-light" href="#">Navbar</Navbar.Brand>
       </div>
       <div className="col-4">
         {props.name}

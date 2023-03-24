@@ -1,13 +1,15 @@
-import { Container } from '@mui/system'
-import React from 'react'
+import { useSelector } from 'react-redux'
 
 function OrderOutput() {
+    const items = useSelector((state) => state.denemeItems.elements);
+    console.log(items)
     return (
-
-        <div className='bg-dark mt-5'>
-            aşdfl
+        <div className=' mt-5'>
+            sadfasd
+            {items.map((e) => (
+                <li>{e}</li>
+            ))}
         </div>
-
     )
 }
 

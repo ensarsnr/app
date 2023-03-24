@@ -1,21 +1,35 @@
-import { style } from '@mui/system'
 import React from 'react'
-import { Container } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
+import { addItem } from '../redux/itemsSlice';
 
 function OrderMenu() {
-    //cursor: pointer eklenebilir className'lere
+    const dispatch = useDispatch();
+    const items = ["Kahve","Soda","Ihlamur","Çay","Sıcak Su"]
+    
+    const handleClick = (e) => {
+        console.log(e.target.textContent)
+        dispatch(addItem(e.target.textContent))
+    }
+    
+    
     return (
-        <Container>
-            <div className='mt-5'>
+        <div className='d-flex justify-content-center'>
+            <div className='mt-5 w-50'>
                 <ul className='list-group'>
-                    <li className='list-group-item list-group-item-action'>Çay</li>
-                    <li className='list-group-item list-group-item-action'>Kahve</li>
-                    <li className='list-group-item list-group-item-action'>Soda</li>
-                    <li className='list-group-item list-group-item-action'>Ihlamur</li>
-                    <li className='list-group-item list-group-item-action'>Sıcak Su</li>
+                    {items.map((e, i) => (
+                        <li 
+                        style={{cursor: "pointer"}}
+                        key={i}
+                        onClick={handleClick} 
+                        className=
+                            "list-group-item mb-1 list-group-item-action d-flex  justify-content-between  align-items-center"
+                        >
+                            {e}
+                        </li>
+                    ))}
                 </ul>
             </div>
-        </Container>
+        </div>
 
     )
 }

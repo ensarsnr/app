@@ -1,0 +1,12 @@
+body {
+    background: url(assets/img/tai9.jpg);
+}
+
+.destroy {
+  color: #4e4d4d;
+}
+  .destroy:hover {
+    cursor: pointer;
+    color: black;
+  }
+  
