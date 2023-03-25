@@ -8,10 +8,6 @@ import { CHOOSEN_ONES, CHOOSE_ORDER, EXIT_APPBAR, FOOD_MENU, WELCOME_USER } from
 import "../Deneme.css"
 
 function Order() {
-
-    // Veri tabanı işlemleri eklenecek.
-
-    // Siparişler buradan verilir
     return (
         <div>
             {/* == AppBar == */}
