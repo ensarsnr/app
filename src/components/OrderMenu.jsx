@@ -4,14 +4,17 @@ import { addItem } from '../redux/slices/itemsSlice';
 
 function OrderMenu() {
     const dispatch = useDispatch();
-    const items = ["Kahve", "Soda", "Ihlamur", "Çay", "Sıcak Su"]
 
+    const items = ["Kahve", "Soda", "Ihlamur", "Çay", "Sıcak Su"]
     const handleClick = (e) => {
         console.log(e.target.textContent)
+        //diziden seçtiğimiz ürünleri itemsSlice dosyasında ki elements'in içine
+        // addItem actionu ile diziye pushluyoruz.
         dispatch(addItem(e.target.textContent))
     }
 
-
+    // dizideki elemanları ekranda gösterip tıklama özelliği ekliyoruz.
+    // elemanlara tıklandıkça dispatch ile hazırladıüımız slice'a gönderiyoruz.
     return (
         <div className='d-flex justify-content-center'>
             <div className='mt-5 w-50'>
