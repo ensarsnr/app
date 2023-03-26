@@ -5,13 +5,19 @@ import { COMPLETED_ORDER_BUTTON } from '../constants/constText';
 import { destroyItem, removeAllItems } from '../redux/slices/itemsSlice';
 import success from "../assets/animation/111541-successful-tick.json"
 import unSucces from "../assets/animation/unnsuccess.json"
-import Animations from './HomePng';
+import Animations from './Animations';
+import { useNavigate } from 'react-router';
 
 function OrderSelected() {
     const [unSuccesful, setUnSuccessful] = useState(false);
     const [successful, setSuccessful] = useState(false);
 
+    const navigate = useNavigate();
+
+
     const dispatch = useDispatch();
+    // itemsSlice'dan aldığımız verileri bu hook sayesinde bu component'e çekiyoruz.
+    // items değişkenine atandı.
     const items = useSelector((state) => state.items.elements);
 
     // çarpılara tıklandığında item'ın silinmesine yarayan fonksiyon
@@ -19,13 +25,22 @@ function OrderSelected() {
 
     const handleSend = () => {
         if (items.length <= 0) {
+            // hiç bir öğe seçilmediyse bu koşul harekete geçiyor ve
+            // başarısız oldun (X) animasyonu harekete geçiyor.
             setUnSuccessful(true);
             setTimeout(() => setUnSuccessful(false), 3900)
         } else {
+            // bu koşulda ise menuden seçim yapıldıysa ve sipariş için
+            // button'a tıklandıysa ekranda başarılı oldu gibisinden
+            // yeşil bir animasyon çıkıyor. Ve bekleme sayfasına yönlendiriyor.
             setSuccessful(true);
-            setTimeout(() => setSuccessful(false), 4200)
+            setTimeout(() => {
+                setSuccessful(false)
+                navigate("waiting")
+            }, 4200)
             console.log(items);
             dispatch(removeAllItems())
+
         }
     }
 

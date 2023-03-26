@@ -3,31 +3,33 @@ import { Button } from 'react-bootstrap'
 import React, { useState } from 'react'
 import { LABEL_DEPARTMENT, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, PLACEHOLDER_DEPARTMENT } from '../constants/constText'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { changeName } from '../redux/slices/namesSlice'
-function Form() {
 
-  const dispatch = useDispatch();
+function Form() {
+  // router ile sayfalar arası geçiş yapmak için bu hook'u kullanıyoruz.
+  // Bunları farklı bir klasörde tutabiliriz her sayfada tek tek kullanmaktansa
+  // Daha düzgün olur şimidlik kalsın böyle
   const navigate = useNavigate();
 
+  // 
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [department, setDepartment] = useState("");
 
   const handleClick = () => {
-
-    //Post işlemi ile girişi sağlarız buradan.
-
+    // Inputlar boşsa diğer sayfaya geçişi engelliyoruz.
     if (!name || !surname || !department) {
+      // Buraya daha güzel bir şekilde uyarı eklemek lazım
+      // konsol'da yazdırmak yerine inputları kırmızı renge çevirebiliriz.
       console.log("Boş geçme")
     } else {
-
-      dispatch(changeName({ name: name }))
+      // name kısmının key-value ilişkisi içinde localstorage e gönderiyoruz.
+      // localde saklı kalıyor isim sonrasında kullanabiliriz.
+      localStorage.setItem("name", name);
+      // koşul uyuşuyorsa seni direkt order sayfasına yöneltiyor.
       navigate("order")
     }
   }
-
-
+  // koşullara veritabanından gelen veriler ile eşleşme kısmı da olacak. POST metodu ile
   return (
     <Paper elevation={1} className="mt-5 w-75">
       <form style={{ padding: "50px 20px 50px 20px" }} className='text-center'>

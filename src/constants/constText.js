@@ -1,3 +1,6 @@
+// Projede yazılan bütün her şeye buradan erişiyoruz.
+// Daha hızlı bir şekilde değişiklik yapmamıza yarar ve projeyi daha dinamik hale getiriyor.
+// Kod yığınından değişiklik yapmak yerine buradan hızlıca işi bitiririz.
 export const LOGIN_BUTTON = "Giriş"
 export const LABEL_NAME = "Name"
 export const LABEL_SURNAME = "Surname";

@@ -6,7 +6,7 @@ import Receiver from "./pages/Receiver";
 import FoodMenu from "./pages/FoodMenu";
 import Waiting from "./pages/Waiting";
 
-//router eklenir sonra
+//routerlar ile sayfalar arası geçişleri buradan ayarlıyoruz.
 function App() {
   return (
     <>

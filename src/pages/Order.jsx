@@ -1,16 +1,22 @@
-import React from 'react'
-import { Row } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import AppBar from '../components/AppBar'
-import OrderMenu from '../components/OrderMenu'
-import OrderSelected from '../components/OrderSelected'
-import { CHOOSEN_ONES, CHOOSE_ORDER, EXIT_APPBAR, FOOD_MENU, WELCOME_USER } from '../constants/constText'
+import React, { useState, useEffect } from 'react';
+import { Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import AppBar from '../components/AppBar';
+import OrderMenu from '../components/OrderMenu';
+import OrderSelected from '../components/OrderSelected';
+import { CHOOSEN_ONES, CHOOSE_ORDER, EXIT_APPBAR, FOOD_MENU, WELCOME_USER } from '../constants/constText';
 import "../Deneme.css"
 
 function Order() {
-    // const nameObj = useSelector((state) => state.names.name);
-    // const name = nameObj.name;
+    const [name, setName] = useState('');
+
+    useEffect(() => {
+        const storedName = localStorage.getItem('name');
+        if (storedName) {
+            setName(storedName);
+        }
+    }, []);
+
     return (
         <div>
             {/* == AppBar == */}
@@ -21,8 +27,7 @@ function Order() {
                     </Link>
                 </div>}
                 name={
-                    // {name.toString()}
-                    <div className='text-center'>{WELCOME_USER}</div>
+                    <div className='text-center'>{WELCOME_USER}{name}</div>
                 }
                 foodMenu={
                     <div className='float-end'>
@@ -50,4 +55,4 @@ function Order() {
     )
 }
 
-export default Order
+export default Order;

@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row } from 'react-bootstrap'
 import Form from '../components/Form'
 import '../App.css';
-import Animations from '../components/HomePng';
+import Animations from '../components/Animations';
 import kettle from "../assets/animation/kettle.json"
 
 function Home() {

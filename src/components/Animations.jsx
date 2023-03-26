@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
 import Lottie from 'lottie-web'
-// import caydanlik from "../assets/animation/Caydanlik.json"
-// import wificoffe from "../assets/animation/wificoffee.json"
 
 
-// burayı tek bir fonksiyon haline getirip her sayfada farklı animasyonu sadce
-// 1 fonskiyon ile halledilebilir tek tek her yerde aynı kodlar yazılmaz
+// animasyonları kontrol etmek için yaptığım bir components
+// her component'ta bunu kullanarak animasyonlar ekleyebilirim.
 function Animations(props) {
     useEffect(() => {
         const anim = Lottie.loadAnimation({

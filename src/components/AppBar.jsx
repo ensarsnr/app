@@ -2,6 +2,8 @@ import { Navbar } from "react-bootstrap";
 
 
 function AppBar(props) {
+  // Klasik bir appbar boostrapten çektim css kısmını.
+  // Propslar ile diğer sayfadan name menuler çıkış işlemlerini alıp burada düzenliyoruz.
   return (
     <Navbar expand="lg" variant="light" className="text-light" bg="dark">
       <div className="col-4 text-center">
