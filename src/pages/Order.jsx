@@ -1,5 +1,6 @@
 import React from 'react'
 import { Row } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import AppBar from '../components/AppBar'
 import OrderMenu from '../components/OrderMenu'
@@ -8,6 +9,8 @@ import { CHOOSEN_ONES, CHOOSE_ORDER, EXIT_APPBAR, FOOD_MENU, WELCOME_USER } from
 import "../Deneme.css"
 
 function Order() {
+    // const nameObj = useSelector((state) => state.names.name);
+    // const name = nameObj.name;
     return (
         <div>
             {/* == AppBar == */}
@@ -18,7 +21,8 @@ function Order() {
                     </Link>
                 </div>}
                 name={
-                    <div className='text-center'>{WELCOME_USER}name</div>
+                    // {name.toString()}
+                    <div className='text-center'>{WELCOME_USER}</div>
                 }
                 foodMenu={
                     <div className='float-end'>

@@ -1,5 +1,6 @@
 export const LOGIN_BUTTON = "Giriş"
-export const LABEL_NAME = "Name / Surname"
+export const LABEL_NAME = "Name"
+export const LABEL_SURNAME = "Surname";
 export const LABEL_DEPARTMENT = "Departmen"
 export const PLACEHOLDER_DEPARTMENT = "ar-ge, ür-ge..."
 export const COMPLETED_ORDER_BUTTON = "Siparişi Tamamla"
