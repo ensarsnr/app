@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
 import { COMPLETED_ORDER_BUTTON } from '../constants/constText';
-import { destroyItem } from '../redux/slices/itemsSlice';
+import { destroyItem, removeAllItems } from '../redux/slices/itemsSlice';
 import success from "../assets/animation/111541-successful-tick.json"
-import unSucces from "../assets/animation/unsuccess.json"
+import unSucces from "../assets/animation/unnsuccess.json"
 import Animations from './HomePng';
 
 function OrderSelected() {
@@ -14,22 +14,20 @@ function OrderSelected() {
     const dispatch = useDispatch();
     const items = useSelector((state) => state.items.elements);
 
-
+    // çarpılara tıklandığında item'ın silinmesine yarayan fonksiyon
     const handleDestroy = (index) => dispatch(destroyItem(index));
 
     const handleSend = () => {
         if (items.length <= 0) {
             setUnSuccessful(true);
-            setTimeout(() => setUnSuccessful(false), 1600)
+            setTimeout(() => setUnSuccessful(false), 3900)
         } else {
             setSuccessful(true);
             setTimeout(() => setSuccessful(false), 4200)
             console.log(items);
-            //items'ın içindeki itemleri silmemiz gerekiyor.
+            dispatch(removeAllItems())
         }
     }
-
-
 
     return (
         <div className='d-flex justify-content-center'>
@@ -77,7 +75,6 @@ function OrderSelected() {
                         width: "20%",
                         height: ""
                     }}>
-                    Bekleniyor...
                     <Animations animation={success} />
                 </div>
             )}
@@ -91,7 +88,6 @@ function OrderSelected() {
                         width: "10%",
                         height: ""
                     }}>
-                    Bekleniyor...
                     <Animations animation={unSucces} />
                 </div>
             )}

@@ -15,10 +15,12 @@ export const itemsSlice = createSlice({
             const indexToDelete = action.payload;
             state.elements.splice(indexToDelete, 1);
         },
-
+        removeAllItems: (state) => {
+            state.elements.splice(0, state.elements.length)
+        }
     }
 })
 
-export const { addItem, destroyItem } = itemsSlice.actions
+export const { addItem, destroyItem, removeAllItems } = itemsSlice.actions
 
 export default itemsSlice.reducer
