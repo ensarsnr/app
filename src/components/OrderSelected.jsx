@@ -37,7 +37,7 @@ function OrderSelected() {
             setTimeout(() => {
                 setSuccessful(false)
                 navigate("waiting")
-            }, 4200)
+            }, 3400)
             console.log(items);
             dispatch(removeAllItems())
 
