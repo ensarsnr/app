@@ -1,7 +1,7 @@
 import { Paper, TextField } from '@mui/material';
 import { Button } from 'react-bootstrap';
 import React, { useState } from 'react';
-import { LABEL_DEPARTMENT, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, PLACEHOLDER_DEPARTMENT } from '../constants/constText';
+import { EMPTY_ERROR, LABEL_DEPARTMENT, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, LOGIN_ERROR, PLACEHOLDER_DEPARTMENT } from '../constants/constText';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../service/service';
 
@@ -12,7 +12,7 @@ function Form() {
     // Daha düzgün olur şimidlik kalsın böyle
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
+  const [name, setname] = useState("");
   const [surname, setSurname] = useState("");
   const [department, setDepartment] = useState("");
   const [error, setError] = useState("");
@@ -23,7 +23,7 @@ function Form() {
       // Inputlar boşsa, uyarı mesajı yazdırıyoruz.
       const errorMessage = document.createElement('p');
       errorMessage.style.color = 'red';
-      setError("Bütün alanları doldurunuz");
+      setError(EMPTY_ERROR);
       document.getElementById('form').appendChild(errorMessage);
       return;
     }
@@ -38,11 +38,13 @@ function Form() {
       }
         // Giriş yapılamadıysa, bir hata mesajı yazdırıyoruz.
     } catch (error) {
+      console.log("hatalı isim falan")
       const errorMessage = document.createElement('p');
       errorMessage.style.color = 'red';
+      setError(LOGIN_ERROR);
       document.getElementById('form').appendChild(errorMessage);
-      setError("Giriş yapılamadı. Lütfen bilgilerinizi kontrol edin.");
       console.log(error);
+      return
     }}
   
 
@@ -52,7 +54,7 @@ function Form() {
         <div className="mb-4">
           <TextField
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setname(e.target.value)}
             className="bg-light w-75"
             label={LABEL_NAME}
             variant="outlined"
@@ -78,8 +80,8 @@ function Form() {
           />
         </div>
         <div className="mb-4 text-center w-100">
-          <Button onClick={handleClick} variant="warning" className="w-75">
-            {LOGIN_BUTTON}
+          <Button onClick={handleClick} variant="primary" className="w-75">
+            <span className='text-light'>{LOGIN_BUTTON}</span>
           </Button>
         </div>
         {error && <div className="text-danger mb-4">{error}</div>}

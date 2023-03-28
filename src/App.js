@@ -12,11 +12,12 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="order" element={<Order />} />
-          <Route path="receiver" element={<Receiver />} />
-          <Route path="foodMenu" element={<FoodMenu />} />
-          <Route path="waiting" element={<Waiting />} />
+          <Route index element={<Home />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/receiver" element={<Receiver />} />
+          <Route path="order/waiting" element={<Waiting />} />
+          <Route path="order/foodMenu" element={<FoodMenu />} />
+          <Route path="order/waiting/menu" element={<FoodMenu />} />
         </Routes>
       </BrowserRouter>
     </>
@@ -24,3 +25,14 @@ function App() {
 }
 
 export default App;
+
+// <Link
+//       to={`/?brand=${brand}`}
+//       {...props}
+//       style={{
+//         ...props.style,
+//         color: isActive ? "red" : "black",
+//       }}
+//     >
+//       {children}
+//     </Link>
