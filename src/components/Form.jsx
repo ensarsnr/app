@@ -27,8 +27,8 @@ function Form() {
       document.getElementById('form').appendChild(errorMessage);
       return;
     }
-    
   
+   
     try {
       const response = await login(name, surname, department);
       if(response === "Login successful!") {
@@ -49,7 +49,7 @@ function Form() {
   
 
   return (
-      <Paper elevation={1} className="mt-5 w-75">
+      <Paper elevation={1} style={{marginTop:"150px"}} className=" w-75">
       <form id='form' style={{ padding: "50px 20px 50px 20px" }} className="text-center">
         <div className="mb-4">
           <TextField

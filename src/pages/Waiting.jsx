@@ -5,7 +5,7 @@ import AppBar from '../components/AppBar'
 import space from '../assets/animation/space.json'
 import { Alert, Container } from 'react-bootstrap'
 import waiting from '../assets/animation/waiting.json'
-import { ALERT_HEADING, ALERT_SUB } from '../constants/constText'
+import { ALERT_HEADING, ALERT_SUB, EXIT_APPBAR, FOOD_MENU } from '../constants/constText'
 
 function Waiting() {
 
@@ -16,7 +16,7 @@ function Waiting() {
             <AppBar element={
                 <div>
                     <Link to={"/"} className="text-light text-decoration-none">
-                        Çıkış
+                        {EXIT_APPBAR}
                     </Link>
                 </div>}
                 name={
@@ -25,7 +25,7 @@ function Waiting() {
                 foodMenu={
                     <div className='float-end'>
                         <Link to="menu" className="text-light text-decoration-none">
-                            Menü
+                            {FOOD_MENU}
                         </Link>
                     </div>
                 }

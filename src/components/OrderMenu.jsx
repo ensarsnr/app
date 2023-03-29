@@ -1,11 +1,25 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { addItem } from '../redux/slices/itemsSlice';
 
+
+
 function OrderMenu() {
     const dispatch = useDispatch();
+    
+    
+    const [data, setData] = useState([]);
 
-    const items = ["Kahve", "Soda", "Ihlamur", "Çay", "Sıcak Su"]
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get("http://localhost:3001/getProducts");
+            setData(response.data);
+        }
+        fetchData();
+    },[])
+    
     const handleClick = (e) => {
         console.log(e.target.textContent)
         //diziden seçtiğimiz ürünleri itemsSlice dosyasında ki elements'in içine
@@ -19,7 +33,7 @@ function OrderMenu() {
         <div className='d-flex justify-content-center'>
             <div className='mt-5 w-50'>
                 <ul className='list-group'>
-                    {items.map((e, i) => (
+                    {data.map((e, i) => (
                         <li
                             style={{ cursor: "pointer" }}
                             key={i}
@@ -27,7 +41,7 @@ function OrderMenu() {
                             className=
                             "list-group-item mb-1 list-group-item-action d-flex  justify-content-between  align-items-center"
                         >
-                            {e}
+                            {e.name}
                         </li>
                     ))}
                 </ul>

@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react'
 import Lottie from 'lottie-web'
 
+// giriş yapılırken user_id aynı şekilde orders id ye atansın sonrasında
+// aynı kişi product seçerken product id si product id ye gitsin
+// içine date eklensin ne kadar alacağı falan yazsın sonrasında tamamlanıyor.
+
+
+
 
 // animasyonları kontrol etmek için yaptığım bir components
 // her component'ta bunu kullanarak animasyonlar ekleyebilirim.
