@@ -3,9 +3,12 @@ import AppBar from '../components/AppBar'
 import WaitingAnimation from '../components/WaitingAnimation'
 import SelectedList from '../components/SelectedList'
 
-import { ALERT_HEADING, ALERT_SUB, EXIT_APPBAR, FOOD_MENU } from '../constants/constText'
+import { ALERT_HEADING, EXIT_APPBAR, FOOD_MENU } from '../constants/constText'
+import { Alert } from 'react-bootstrap'
+import { useState } from 'react'
 
 function Waiting() {
+    const [show, setShow] = useState(true);
     return (
         <>
             {/* ========== AppBar =============== */}
@@ -18,7 +21,7 @@ function Waiting() {
                     </div>
                 }
                 name={
-                    <div className='text-center'></div>
+                    <div className='text-center'>Lütfen Bekleyiniz..</div>
                 }
                 foodMenu={
                     <div className='float-end'>
@@ -29,6 +32,11 @@ function Waiting() {
                 }
             />
             {/* ========= AppBar ============ */}
+            {show && (
+                 <Alert variant="success" onClose={() => setShow(false)} dismissible>
+                 <Alert.Heading>{ALERT_HEADING}</Alert.Heading>
+               </Alert>
+            )}
             <div className='row'>
                 <div className='col-12'>
                     <WaitingAnimation />

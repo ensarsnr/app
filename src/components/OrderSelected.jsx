@@ -7,6 +7,7 @@ import success from "../assets/animation/111541-successful-tick.json"
 import unSucces from "../assets/animation/unnsuccess.json"
 import Animations from './Animations';
 import { useNavigate } from 'react-router';
+import { selectOrder } from '../service/service';
 
 function OrderSelected() {
     const [unSuccesful, setUnSuccessful] = useState(false);
@@ -39,6 +40,7 @@ function OrderSelected() {
                 navigate("waiting")
             }, 3400)
             console.log(items);
+            selectOrder(items, localStorage.getItem("name"))
             dispatch(removeAllItems())
 
         }

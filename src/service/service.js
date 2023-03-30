@@ -20,16 +20,25 @@ const login = async (name, surname, department) => {
 
 
 const productData = async (value) => {
-  const response = await axios.get("http://localhost:3001/getProduct");
+  const response = await axios.get("http://localhost:3001/products");
   value(response.data)
+}
+
+const selectOrder = async (product_name, user_name) => {
+  try {
+    const response = await api.post('/orders',{
+      product_name: product_name,
+      user_name: user_name
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
 
-
-
-
-
-export { login, productData };
+export { login, productData, selectOrder };
 
 

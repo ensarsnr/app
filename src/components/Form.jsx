@@ -80,8 +80,8 @@ function Form() {
           />
         </div>
         <div className="mb-4 text-center w-100">
-          <Button onClick={handleClick} variant="primary" className="w-75">
-            <span className='text-light'>{LOGIN_BUTTON}</span>
+          <Button onClick={handleClick} variant="warning" className="w-75">
+            <span className='text-dark'>{LOGIN_BUTTON}</span>
           </Button>
         </div>
         {error && <div className="text-danger mb-4">{error}</div>}

@@ -14,7 +14,7 @@ function OrderMenu() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get("http://localhost:3001/getProducts");
+            const response = await axios.get("http://localhost:3001/products");
             setData(response.data);
         }
         fetchData();
@@ -38,8 +38,12 @@ function OrderMenu() {
                             style={{ cursor: "pointer" }}
                             key={i}
                             onClick={handleClick}
-                            className=
-                            "list-group-item mb-1 list-group-item-action d-flex  justify-content-between  align-items-center"
+                            className="list-group-item
+                                mb-1
+                                list-group-item-action 
+                                d-flex 
+                                justify-content-between  
+                                align-items-center"
                         >
                             {e.name}
                         </li>

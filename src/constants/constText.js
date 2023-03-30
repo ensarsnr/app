@@ -1,6 +1,3 @@
-// Projede yazılan bütün her şeye buradan erişiyoruz.
-// Daha hızlı bir şekilde değişiklik yapmamıza yarar ve projeyi daha dinamik hale getiriyor.
-// Kod yığınından değişiklik yapmak yerine buradan hızlıca işi bitiririz.
 export const LOGIN_BUTTON = "Giriş"
 export const LABEL_NAME = "Name"
 export const LABEL_SURNAME = "Surname";
@@ -15,5 +12,4 @@ export const FOOD_MENU = "Menü"
 export const EMPTY_ERROR = "Bütün alanları doldurunuz"
 export const LOGIN_ERROR = "Giriş yapılamadı. Lütfen bilgilerinizi kontrol edin."
 export const ALERT_HEADING = "Siparişiniz alındı!"
-export const ALERT_SUB = "Lütfen bekleyiniz..."
 export const LABEL_SEARCH = "Search"
