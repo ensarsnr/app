@@ -1,24 +1,22 @@
-import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Animations from '../components/Animations'
 import AppBar from '../components/AppBar'
-import space from '../assets/animation/space.json'
-import { Alert, Container } from 'react-bootstrap'
-import waiting from '../assets/animation/waiting.json'
+import WaitingAnimation from '../components/WaitingAnimation'
+import SelectedList from '../components/SelectedList'
+
 import { ALERT_HEADING, ALERT_SUB, EXIT_APPBAR, FOOD_MENU } from '../constants/constText'
 
 function Waiting() {
-
-    const [show, setShow] = useState(true);
-
     return (
         <>
-            <AppBar element={
-                <div>
-                    <Link to={"/"} className="text-light text-decoration-none">
-                        {EXIT_APPBAR}
-                    </Link>
-                </div>}
+            {/* ========== AppBar =============== */}
+            <AppBar
+                element={
+                    <div>
+                        <Link to={"/"} className="text-light text-decoration-none">
+                            {EXIT_APPBAR}
+                        </Link>
+                    </div>
+                }
                 name={
                     <div className='text-center'></div>
                 }
@@ -30,31 +28,15 @@ function Waiting() {
                     </div>
                 }
             />
-            {show && (
-                 <Alert variant="success" onClose={() => setShow(false)} dismissible>
-                 <Alert.Heading>{ALERT_HEADING}</Alert.Heading>
-                 <p>{ALERT_SUB}</p>
-               </Alert>
-            )}
-            <Container>
-                <div className='row'>
-                    <div
-                    className='col-6' 
-                    style={{
-                        width: "30%",
-                        margin: "auto",
-                    }}>
-                        <Animations  animation ={space} />
-                    </div>
-                    <div
-                    className='col-6' 
-                    style={{
-                        width:"100%",
-                    }}>
-                        <Animations animation = {waiting} />
-                    </div>
+            {/* ========= AppBar ============ */}
+            <div className='row'>
+                <div className='col-12'>
+                    <WaitingAnimation />
                 </div>
-            </Container>
+                <div className='col-12'>
+                    <SelectedList />
+                </div>
+            </div>
         </>
     )
 }

@@ -19,7 +19,17 @@ const login = async (name, surname, department) => {
 };
 
 
+const productData = async (value) => {
+  const response = await axios.get("http://localhost:3001/getProduct");
+  value(response.data)
+}
 
 
 
-export { login };
+
+
+
+
+export { login, productData };
+
+
