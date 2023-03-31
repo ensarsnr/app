@@ -1,6 +1,6 @@
 Yapılacaklar
 
-- Ad, soyad ile eleme yapılması lazım yoksa işler karışabilir.
+- ~~Ad, soyad ile eleme yapılması lazım yoksa işler karışabilir.~~
 - ~~Search kısmını geliştir.~~
 - Backend kısmını düzenle.
 - Giriş yapıldığında isteyen şifre ekleyebilir.
