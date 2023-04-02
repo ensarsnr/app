@@ -33,9 +33,9 @@ function Waiting() {
             />
             {/* ========= AppBar ============ */}
             {show && (
-                 <Alert variant="success" onClose={() => setShow(false)} dismissible>
-                 <Alert.Heading>{ALERT_HEADING}</Alert.Heading>
-               </Alert>
+                <Alert variant="success" onClose={() => setShow(false)} dismissible>
+                    <Alert.Heading>{ALERT_HEADING}</Alert.Heading>
+                </Alert>
             )}
             <div className='row'>
                 <div className='col-12'>

@@ -9,7 +9,7 @@ import "../Deneme.css"
 
 function Order() {
     const [name, setName] = useState('');
-    
+
     useEffect(() => {
         const storedName = localStorage.getItem('name');
         if (storedName) {
@@ -36,17 +36,17 @@ function Order() {
                         </Link>
                     </div>
                 }
-                
+
             />
             {/* == AppBar == */}
 
             <div className='m-5'>
                 <Row>
-                    <div className='col-6'>
+                    <div className='col-md-6 col-sm-12 '>
                         <h1 className='mt-5 text-center text-danger'>{CHOOSE_ORDER}</h1>
                         <OrderMenu />
                     </div>
-                    <div className='col-6 text-center'>
+                    <div className='col-md-6 col-sm-12 text-center'>
                         <h1 className='mt-5 text-center text-danger'>{CHOOSEN_ONES}</h1>
                         <OrderSelected />
                     </div>

@@ -6,7 +6,6 @@ import { LABEL_SEARCH } from '../constants/constText';
 
 function SelectedList() {
     const [data, setData] = useState([]);
-    const deneme = localStorage.getItem("name");
     const [search, setSearch] = useState("");
 
 
@@ -17,39 +16,40 @@ function SelectedList() {
         }
         fetchData();
     }, [])
-    
-    return ( 
+
+    const filteredData = data.filter(e => e.product_name.toLowerCase().includes(search.toLowerCase()));
+
+    return (
         <Container>
-            {/* BOOSTRAP'TEN ÇEKERİZ */}
-            {/* SCROOL EKLERİZ SAYFA DEĞİLDE SADECE LİSTELER AŞAĞIYA DOĞRU KAYAR */}
-            {/* Yanına tarihi ve kaç adet alınmış onları da ekleriz.. */}
-            {/* Bugün alınanlar ve geçmiş diye 2 panet olsun, eklenebilir. */}
-            {/* yeşil renkte sipariş bekleniyor kırmızı renk ise sipariş geldi diyelim */}
-            {/* Veya direkt siparişler ve tarihler yer alsında yeter. */}
+            {/* SEARCH BOX */}
             <div style={{ textAlign: "center" }} className="mb-5">
-                <TextField value = {search} onChange={(e) => setSearch(e.target.value)} className='bg-light' label={LABEL_SEARCH} />
-                <div>{search}</div>
+                <TextField
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className='bg-light'
+                    label={LABEL_SEARCH}
+                />
             </div>
-            <ul>
-            {
-                data.map((e, i) => {
-                    if (deneme.toLowerCase() === e.user_name.toLowerCase()) {
-                        return (
-                            <li style={{listStyle:"none"}}>
-                                <div className='card mb-2' key={i}>
-                                <div className='card-body' style={{ display: "flex", justifyContent: "space-between" }}>
-                                    <div>{e.user_name.toUpperCase()}</div> 
+            <ul style={{ display: "flex", flexDirection: "column-reverse" }} >
+                {
+                    filteredData.map((e, i) => (
+                        <li style={{ listStyle: "none" }} key={i}>
+                            <div className='card mb-2'>
+                                <div
+                                    className='card-body'
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "space-between"
+                                    }}
+                                >
+                                    <div>{e.user_name.toUpperCase()}</div>
                                     <div>{e.product_name}</div>
-                                    <div>{new Date(e.order_date).toLocaleString()}</div>   
+                                    <div>{new Date(e.order_date).toLocaleString()}</div>
                                 </div>
                             </div>
-                            </li>
-                        )
-                    } else {
-                        return null;
-                    }
-                })
-            }
+                        </li>
+                    ))
+                }
             </ul>
         </Container>
     )

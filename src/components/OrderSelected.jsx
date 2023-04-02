@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
 import { COMPLETED_ORDER_BUTTON } from '../constants/constText';
 import { destroyItem, removeAllItems } from '../redux/slices/itemsSlice';
@@ -12,6 +12,8 @@ import { selectOrder } from '../service/service';
 function OrderSelected() {
     const [unSuccesful, setUnSuccessful] = useState(false);
     const [successful, setSuccessful] = useState(false);
+    const [show, setShow] = useState(false);
+
 
     const navigate = useNavigate();
 
@@ -20,17 +22,16 @@ function OrderSelected() {
     // itemsSlice'dan aldığımız verileri bu hook sayesinde bu component'e çekiyoruz.
     // items değişkenine atandı.
     const items = useSelector((state) => state.items.elements);
-
     // çarpılara tıklandığında item'ın silinmesine yarayan fonksiyon
     const handleDestroy = (index) => dispatch(destroyItem(index));
 
-    const handleSend = () => {
+    const handleSend = (e) => {
         if (items.length <= 0) {
             // hiç bir öğe seçilmediyse bu koşul harekete geçiyor ve
             // başarısız oldun (X) animasyonu harekete geçiyor.
             setUnSuccessful(true);
             setTimeout(() => setUnSuccessful(false), 3900)
-        } else {
+        } else if (items.length <= 3) {
             // bu koşulda ise menuden seçim yapıldıysa ve sipariş için
             // button'a tıklandıysa ekranda başarılı oldu gibisinden
             // yeşil bir animasyon çıkıyor. Ve bekleme sayfasına yönlendiriyor.
@@ -40,15 +41,18 @@ function OrderSelected() {
                 navigate("waiting")
             }, 3400)
             console.log(items);
-            selectOrder(items, localStorage.getItem("name"))
             dispatch(removeAllItems())
-
+            items.map((e) => selectOrder(e, localStorage.getItem("name")))
+        } else {
+            console.log("Sınırı aştın")
+            setShow(true);
         }
+        // items.map((e) => console.log(e));
     }
 
     return (
-        <div className='d-flex justify-content-center'>
-            <div className='mt-5 w-50'>
+        <div className='row d-flex justify-content-center'>
+            <div className='col-12 mt-5 w-50'>
                 <ul className='list-group'>
                     {items.map((e, i) => (
                         <li
@@ -78,7 +82,13 @@ function OrderSelected() {
                     {COMPLETED_ORDER_BUTTON}
                 </Button>
             </div>
-
+            <div className='mt-5 col-12 '>
+                {show && (
+                    <Alert onClose={() => setShow(false)} variant="danger" dismissible>
+                        Limit 3 adet
+                    </Alert>
+                )}
+            </div>
             {successful && (
                 // Koşullu render yapma işlemi eğer showAnimation true ise ekranda göstericek,
                 // False olursa ekranda gözükmeyecek.

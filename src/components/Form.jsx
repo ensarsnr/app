@@ -7,9 +7,9 @@ import { login } from '../service/service';
 
 function Form() {
 
-    // router ile sayfalar arası geçiş yapmak için bu hook'u kullanıyoruz.
-    // Bunları farklı bir klasörde tutabiliriz her sayfada tek tek kullanmaktansa
-    // Daha düzgün olur şimidlik kalsın böyle
+  // router ile sayfalar arası geçiş yapmak için bu hook'u kullanıyoruz.
+  // Bunları farklı bir klasörde tutabiliriz her sayfada tek tek kullanmaktansa
+  // Daha düzgün olur şimidlik kalsın böyle
   const navigate = useNavigate();
 
   const [name, setname] = useState("");
@@ -25,18 +25,30 @@ function Form() {
       errorMessage.style.color = 'red';
       setError(EMPTY_ERROR);
       document.getElementById('form').appendChild(errorMessage);
+
       return;
     }
-  
-   
+
+
     try {
       const response = await login(name, surname, department);
-      if(response === "Login successful!") {
-        navigate("order");
-        localStorage.setItem("name", name);
-        console.log(response)
+      if (response === "Login successful!") {
+        if (
+          department.toLowerCase() === "Çay Ocaği".toLowerCase() ||
+          department.toLowerCase() === "Çay Ocağı".toLowerCase()) {
+          localStorage.setItem("surname", surname)
+          navigate("/receiver")
+
+        }
+
+        else {
+          navigate("order");
+          localStorage.setItem("name", name);
+          localStorage.setItem("surname", surname);
+          console.log(response)
+        }
       }
-        // Giriş yapılamadıysa, bir hata mesajı yazdırıyoruz.
+      // Giriş yapılamadıysa, bir hata mesajı yazdırıyoruz.
     } catch (error) {
       console.log("hatalı isim falan")
       const errorMessage = document.createElement('p');
@@ -45,11 +57,12 @@ function Form() {
       document.getElementById('form').appendChild(errorMessage);
       console.log(error);
       return
-    }}
-  
+    }
+  }
+
 
   return (
-      <Paper elevation={1} style={{marginTop:"150px"}} className=" w-75">
+    <Paper elevation={1} style={{ marginTop: "150px" }} className=" w-75">
       <form id='form' style={{ padding: "50px 20px 50px 20px" }} className="text-center">
         <div className="mb-4">
           <TextField

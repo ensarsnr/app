@@ -3,13 +3,14 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { addItem } from '../redux/slices/itemsSlice';
+import { selectOrder } from '../service/service';
 
 
 
 function OrderMenu() {
     const dispatch = useDispatch();
-    
-    
+
+
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -18,13 +19,14 @@ function OrderMenu() {
             setData(response.data);
         }
         fetchData();
-    },[])
-    
+    }, [])
+
     const handleClick = (e) => {
         console.log(e.target.textContent)
         //diziden seçtiğimiz ürünleri itemsSlice dosyasında ki elements'in içine
         // addItem actionu ile diziye pushluyoruz.
         dispatch(addItem(e.target.textContent))
+
     }
 
     // dizideki elemanları ekranda gösterip tıklama özelliği ekliyoruz.

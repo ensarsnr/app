@@ -14,7 +14,7 @@ const login = async (name, surname, department) => {
     console.log(response.data)
     return response.data;
   } catch (err) {
-    console.log(err) 
+    console.log(err)
   }
 };
 
@@ -26,7 +26,7 @@ const productData = async (value) => {
 
 const selectOrder = async (product_name, user_name) => {
   try {
-    const response = await api.post('/orders',{
+    const response = await api.post('/orders', {
       product_name: product_name,
       user_name: user_name
     });
