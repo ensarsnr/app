@@ -1,5 +1,7 @@
 Yapılacaklar
 
+- Çay ocağı kısmında ise gönderildi alındı kısımları yeşil kırmızı olacak şekilde ayarlamak lazım
+- filtreleme işlemi bu aktif pasif olayına göre yaparız şimdilik isim şeklinde
 - Ad, soyad ile eleme yapılması lazım yoksa işler karışabilir.
 - ~~Search kısmını geliştir.~~
 - Backend kısmını düzenle.
