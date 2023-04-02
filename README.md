@@ -1,11 +1,13 @@
 Yapılacaklar
 
+- Çay ocağı kısmında ise gönderildi alındı kısımları yeşil kırmızı olacak şekilde ayarlamak lazım
+- aktif pasif olaylarını local'de veya database de tutup her zaman görüntü
+- filtreleme işlemi bu aktif pasif olayına göre yaparız şimdilik isim şeklinde
 - Ad, soyad ile eleme yapılması lazım yoksa işler karışabilir.
-- Search kısmını geliştir.
+- ~~Search kısmını geliştir.~~
 - Backend kısmını düzenle.
 - Giriş yapıldığında isteyen şifre ekleyebilir.
-- Birden fazla seçim yapabilsin.(Maksimum 3 tane olsun.)
+- ~~Birden fazla seçim yapabilsin.(Maksimum 3 tane olsun.)~~
 - Exit basıldığında pop-up çıksın emin misin diye bi sorsun.
-- Ters sıralamayı düzelt.
-- Aklıma şimdilik bu kadar geldi.
-- Adetleri ekle ve veritabanında ki orders değeri bir dizi olarak almaya çalış.
+- ~~Ters sıralamayı düzelt.~~
+- ~~istediğimiz kadar seçmke için her item'e tıklandığında database'e kaydetsin çarpıya basıldığında ise silsin en son redux ile diğer sayfada onları gösteririz.~~
