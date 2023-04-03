@@ -3,13 +3,9 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { addItem } from '../redux/slices/itemsSlice';
-import { selectOrder } from '../service/service';
-
-
 
 function OrderMenu() {
     const dispatch = useDispatch();
-
 
     const [data, setData] = useState([]);
 
@@ -25,8 +21,9 @@ function OrderMenu() {
         console.log(e.target.textContent)
         //diziden seçtiğimiz ürünleri itemsSlice dosyasında ki elements'in içine
         // addItem actionu ile diziye pushluyoruz.
-        dispatch(addItem(e.target.textContent))
+        dispatch(addItem(e.target.textContent));
 
+        // Tıklanan elemanın "onClick" özelliğini kaldırıyoruz.
     }
 
     // dizideki elemanları ekranda gösterip tıklama özelliği ekliyoruz.
@@ -53,7 +50,6 @@ function OrderMenu() {
                 </ul>
             </div>
         </div>
-
     )
 }
 

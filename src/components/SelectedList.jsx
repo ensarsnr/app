@@ -7,7 +7,7 @@ import { LABEL_SEARCH } from '../constants/constText';
 function SelectedList() {
     const [data, setData] = useState([]);
     const [search, setSearch] = useState("");
-
+    const name = localStorage.getItem("name");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,23 +32,27 @@ function SelectedList() {
             </div>
             <ul style={{ display: "flex", flexDirection: "column-reverse" }} >
                 {
-                    filteredData.map((e, i) => (
-                        <li style={{ listStyle: "none" }} key={i}>
-                            <div className='card mb-2'>
-                                <div
-                                    className='card-body'
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "space-between"
-                                    }}
-                                >
-                                    <div>{e.user_name.toUpperCase()}</div>
-                                    <div>{e.product_name}</div>
-                                    <div>{new Date(e.order_date).toLocaleString()}</div>
+                    filteredData.map((e, i) => {
+                        if (name.toLowerCase() === e.user_name.toLowerCase()) {
+                            return (
+                                <li style={{ listStyle: "none" }} key={i}>
+                                <div className='card mb-2'>
+                                    <div
+                                        className='card-body'
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "space-between"
+                                        }}
+                                    >
+                                        <div>{e.user_name.toUpperCase()}</div>
+                                        <div>{e.product_name}</div>
+                                        <div>{new Date(e.order_date).toLocaleString()}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    ))
+                            </li>
+                            )
+                        }
+                    })
                 }
             </ul>
         </Container>

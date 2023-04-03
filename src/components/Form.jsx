@@ -1,8 +1,8 @@
 import { Paper, TextField } from '@mui/material';
 import { Button } from 'react-bootstrap';
 import React, { useState } from 'react';
-import { EMPTY_ERROR, LABEL_DEPARTMENT, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, LOGIN_ERROR, PLACEHOLDER_DEPARTMENT } from '../constants/constText';
-import { useNavigate } from 'react-router-dom';
+import { EMPTY_ERROR, LABEL_DEPARTMENT, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, LOGIN_ERROR, PLACEHOLDER_DEPARTMENT, REGISTER_FORM } from '../constants/constText';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../service/service';
 
 function Form() {
@@ -96,6 +96,9 @@ function Form() {
           <Button onClick={handleClick} variant="warning" className="w-75">
             <span className='text-dark'>{LOGIN_BUTTON}</span>
           </Button>
+          <div className='mt-3'>
+            <Link to={"register"} className='text-decoration-none'>{REGISTER_FORM}</Link>
+          </div>
         </div>
         {error && <div className="text-danger mb-4">{error}</div>}
       </form>

@@ -5,6 +5,7 @@ import Order from './pages/Order'
 import Receiver from "./pages/Receiver";
 import FoodMenu from "./pages/FoodMenu";
 import Waiting from "./pages/Waiting";
+import Register from "./components/Register";
 
 //routerlar ile sayfalar arası geçişleri buradan ayarlıyoruz.
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="order/waiting" element={<Waiting />} />
           <Route path="order/foodMenu" element={<FoodMenu />} />
           <Route path="order/waiting/menu" element={<FoodMenu />} />
+          <Route path="register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </>

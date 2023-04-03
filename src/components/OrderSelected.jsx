@@ -13,7 +13,9 @@ function OrderSelected() {
     const [unSuccesful, setUnSuccessful] = useState(false);
     const [successful, setSuccessful] = useState(false);
     const [show, setShow] = useState(false);
-
+    const [count, setCount] = useState(0);
+    
+    const menuItemsLength = 4;    
 
     const navigate = useNavigate();
 
@@ -31,7 +33,7 @@ function OrderSelected() {
             // başarısız oldun (X) animasyonu harekete geçiyor.
             setUnSuccessful(true);
             setTimeout(() => setUnSuccessful(false), 3900)
-        } else if (items.length <= 3) {
+        } else if (items.length <= menuItemsLength) {
             // bu koşulda ise menuden seçim yapıldıysa ve sipariş için
             // button'a tıklandıysa ekranda başarılı oldu gibisinden
             // yeşil bir animasyon çıkıyor. Ve bekleme sayfasına yönlendiriyor.
@@ -50,6 +52,11 @@ function OrderSelected() {
         // items.map((e) => console.log(e));
     }
 
+
+    const increment = (e) => {
+        setCount(count + 1)
+    }
+
     return (
         <div className='row d-flex justify-content-center'>
             <div className='col-12 mt-5 w-50'>
@@ -58,11 +65,29 @@ function OrderSelected() {
                         <li
                             key={i}
                             className="
+                                row    
                                 list-group-item mb-1 d-flex  
                                 justify-content-between  
                                 align-items-center
                             ">
-                            {e} <span
+                            <div className='col-6'>
+                            {e} ({count})
+                            </div>
+                            <div className='col-6 '>
+
+                            <span 
+                                className='
+                                    badge 
+                                    rounded-pill 
+                                    text-dark' 
+                                onClick={() => increment(e)} 
+                                style={{
+                                    fontSize: "20px", 
+                                    cursor:"pointer"
+                                    }}
+                                >+</span>
+
+                            <span
                                 onClick={() => handleDestroy(i)}
                                 className='
                                     badge  
@@ -71,12 +96,13 @@ function OrderSelected() {
                             >
                                 X
                             </span>
+                            </div>
                         </li>
                     ))}
                 </ul>
                 <Button
                     onClick={handleSend}
-                    className='w-100'
+                    className='w-100 mt-3'
                     variant='success'
                 >
                     {COMPLETED_ORDER_BUTTON}
