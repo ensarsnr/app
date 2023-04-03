@@ -14,3 +14,4 @@ export const LOGIN_ERROR = "Giriş yapılamadı. Lütfen bilgilerinizi kontrol e
 export const ALERT_HEADING = "Siparişiniz alındı!"
 export const LABEL_SEARCH = "Search"
 export const REGISTER_FORM = "Hesabınız yoksa tıklayın"
+export const USER_PASSWORD = "Parola"
