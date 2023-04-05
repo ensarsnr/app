@@ -2,8 +2,9 @@ import { Paper, TextField } from '@mui/material'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { LABEL_NAME, LABEL_SURNAME, REGISTER, USER_PASSWORD } from '../constants/constText'
 import { useState } from 'react';
-import { login } from '../service/service';
+import { register } from '../service/service';
 import { useNavigate } from 'react-router';
+import { EXT_NUMBER } from '../constants/constText';
 
 function Register() {
 
@@ -13,6 +14,7 @@ function Register() {
     const [department, setDepartment] = useState("Çay Ocağı");
     const [surname, setSurname] = useState("");
     const [password, setPassword] = useState("");
+    const [number, setNumber] = useState("");
 
     const departments = [
         "Çay Ocağı",
@@ -23,14 +25,14 @@ function Register() {
 
 
     const handleClick = async () => {
-        if (!name || !surname || !department || !password) {
+        if (!name || !surname || !department || !password || !number) {
             console.log("boş geçme")
             return;
         }
 
 
         try {
-            const response = await login(name, surname, department, password);
+            const response = await register(name, surname, department, number, password);
             if (response === "Register successful!")
                 navigate("/")
         } catch (error) {
@@ -65,7 +67,11 @@ function Register() {
                                     label={LABEL_SURNAME} />
                             </div>
                             <div className='p-2'>
-
+                            <TextField
+                                    value={number}
+                                    onChange={(e) => setNumber(e.target.value)}
+                                    className='w-75'
+                                    label={EXT_NUMBER} />
                             </div>
                             <div className='p-2'>
                                 <TextField

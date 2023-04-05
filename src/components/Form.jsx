@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { EMPTY_ERROR, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, LOGIN_ERROR, REGISTER_FORM, USER_PASSWORD } from '../constants/constText';
 import { Link, useNavigate } from 'react-router-dom';
-import { register, } from '../service/service';
+import { login, register, } from '../service/service';
 
 function Form() {
 
@@ -40,7 +40,7 @@ function Form() {
 
 
     try {
-      const response = await register(name, surname, department, password);
+      const response = await login(name, surname, department, password);
       if (response === "Login successful!") {
         if (
           department.toLowerCase() === "Çay Ocaği".toLowerCase() ||

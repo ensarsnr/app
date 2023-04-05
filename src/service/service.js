@@ -19,13 +19,14 @@ const login = async (name, surname, department, password) => {
   }
 };
 
-const register = async (name, surname, department, password) => {
+const register = async (name, surname, department, password, number) => {
   try {
     const response = await api.post('/register', {
       name: name,
       surname: surname,
       department: department,
       password: password,
+      number: number,
     });
     console.log(response.data)
     return response.data;
