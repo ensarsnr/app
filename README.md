@@ -5,7 +5,7 @@ Yapılacaklar
 - filtreleme işlemi bu aktif pasif olayına göre yaparız şimdilik isim şeklinde
 -  ~~Şifreli bir şekilde girişler olacak.~~
 - ~~Search kısmını geliştir.~~
-- Backend kısmını düzenle.
+- ~~Backend kısmını düzenle.~~
 - ~~Birden fazla seçim yapabilsin.(Maksimum 3 tane olsun.)~~
 - ~~Ters sıralamayı düzelt.~~
 - ~~istediğimiz kadar seçmke için her item'e tıklandığında database'e kaydetsin çarpıya basıldığında ise silsin en son redux ile diğer sayfada onları gösteririz.~~
