@@ -7,7 +7,6 @@ Yapılacaklar
 - ~~Search kısmını geliştir.~~
 - Backend kısmını düzenle.
 - ~~Birden fazla seçim yapabilsin.(Maksimum 3 tane olsun.)~~
-- Exit basıldığında pop-up çıksın emin misin diye bi sorsun.
 - ~~Ters sıralamayı düzelt.~~
 - ~~istediğimiz kadar seçmke için her item'e tıklandığında database'e kaydetsin çarpıya basıldığında ise silsin en son redux ile diğer sayfada onları gösteririz.~~
 - bir gün sonra silme işlemi için if(gün ne zaman yarın ki güne eşit olur gibisinden işlem yaparsın ona göre delete çalışır)
