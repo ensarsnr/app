@@ -1,18 +1,19 @@
 import { Paper, TextField } from '@mui/material'
 import { Button, Col, Container, Row } from 'react-bootstrap'
-import { EMPTY_ERROR, EXT_NUMBER, LABEL_NAME, LABEL_SURNAME, USER_PASSWORD } from '../constants/constText'
+import { LABEL_NAME, LABEL_SURNAME, REGISTER, USER_PASSWORD } from '../constants/constText'
 import { useState } from 'react';
-import { register } from '../service/service';
+import { login } from '../service/service';
+import { useNavigate } from 'react-router';
 
 function Register() {
-    
+
+    const navigate = useNavigate();
+
     const [name, setName] = useState("");
     const [department, setDepartment] = useState("Çay Ocağı");
-    const [surname, setSurname] = useState("");    
-    const [extNumber, setExtNumber] = useState("");
+    const [surname, setSurname] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    
+
     const departments = [
         "Çay Ocağı",
         "AR-GE",
@@ -22,16 +23,19 @@ function Register() {
 
 
     const handleClick = async () => {
-        if (!name || !surname || !department) {
-           console.log("boş geçme")
-           return;
-          }
-          try {
-            const response = await register(name, surname, department, password);
-            console.log(response);
-          } catch (error) {
+        if (!name || !surname || !department || !password) {
+            console.log("boş geçme")
+            return;
+        }
+
+
+        try {
+            const response = await login(name, surname, department, password);
+            if (response === "Register successful!")
+                navigate("/")
+        } catch (error) {
             console.log(error)
-          }
+        }
     }
 
 
@@ -47,16 +51,29 @@ function Register() {
                         <h1 className='text-center mt-5'>Kayıt ol</h1>
                         <form className='mt-2 text-center'>
                             <div className='p-2 pt-5'>
-                                <TextField value={name} onChange={(e) => setName(e.target.value)} className='w-75' label={LABEL_NAME} />
+                                <TextField
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className='w-75'
+                                    label={LABEL_NAME} />
                             </div>
                             <div className='p-2'>
-                                <TextField value={surname} onChange={(e) => setSurname(e.target.value)} className='w-75' label={LABEL_SURNAME} />
+                                <TextField
+                                    value={surname}
+                                    onChange={(e) => setSurname(e.target.value)}
+                                    className='w-75'
+                                    label={LABEL_SURNAME} />
                             </div>
                             <div className='p-2'>
 
                             </div>
                             <div className='p-2'>
-                                <TextField value={password} onChange={(e) => setPassword(e.target.value)}  className='w-75' type='password' label={USER_PASSWORD} />
+                                <TextField
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className='w-75'
+
+                                    label={USER_PASSWORD} />
                             </div>
                             <div className='p-2'>
                                 <select value={department} onChange={(e) => setDepartment(e.target.value)} className="form-select form-select-lg w-75 m-auto" >
@@ -66,7 +83,12 @@ function Register() {
                                 </select>
                             </div>
                             <div className='p-2'>
-                                <Button variant='success' onClick={handleClick} className='p-2 w-75'>Kayıt Ol</Button>
+                                <Button
+                                    variant='success'
+                                    onClick={handleClick}
+                                    className='p-2 w-75'>
+                                    {REGISTER}
+                                </Button>
                             </div>
                         </form>
                         <div>

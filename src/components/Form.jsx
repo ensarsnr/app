@@ -1,9 +1,9 @@
 import { Paper, TextField } from '@mui/material';
 import { Button } from 'react-bootstrap';
 import React, { useState } from 'react';
-import { EMPTY_ERROR, LABEL_DEPARTMENT, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, LOGIN_ERROR, PLACEHOLDER_DEPARTMENT, REGISTER_FORM } from '../constants/constText';
+import { EMPTY_ERROR, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, LOGIN_ERROR, REGISTER_FORM, USER_PASSWORD } from '../constants/constText';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../service/service';
+import { register, } from '../service/service';
 
 function Form() {
 
@@ -16,10 +16,19 @@ function Form() {
   const [surname, setSurname] = useState("");
   const [department, setDepartment] = useState("");
   const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
+
+  const departments = [
+    "Çay Ocağı",
+    "AR-GE",
+    "ÜR-GE",
+    "Muhasebe"
+  ]
+
 
   const handleClick = async () => {
     // Inputlar boşsa diğer sayfaya geçişi engelliyoruz.
-    if (!name || !surname || !department) {
+    if (!name || !surname || !department || !password) {
       // Inputlar boşsa, uyarı mesajı yazdırıyoruz.
       const errorMessage = document.createElement('p');
       errorMessage.style.color = 'red';
@@ -31,7 +40,7 @@ function Form() {
 
 
     try {
-      const response = await login(name, surname, department);
+      const response = await register(name, surname, department, password);
       if (response === "Login successful!") {
         if (
           department.toLowerCase() === "Çay Ocaği".toLowerCase() ||
@@ -82,15 +91,20 @@ function Form() {
             variant="outlined"
           />
         </div>
-        <div className="mb-4">
+        <div className='mb-4'>
           <TextField
-            value={department}
-            onChange={(e) => setDepartment(e.target.value)}
-            className="bg-light w-75"
-            placeholder={PLACEHOLDER_DEPARTMENT}
-            label={LABEL_DEPARTMENT}
-            variant="outlined"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className='bg-light w-75'
+            label={USER_PASSWORD}
           />
+        </div>
+        <div className="mb-4">
+          <select value={department} onChange={(e) => setDepartment(e.target.value)} className="form-select form-select-lg w-75 m-auto" >
+            {departments.map((e) => (
+              <option key={e}>{e}</option>
+            ))}
+          </select>
         </div>
         <div className="mb-4 text-center w-100">
           <Button onClick={handleClick} variant="warning" className="w-75">

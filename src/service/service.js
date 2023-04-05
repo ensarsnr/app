@@ -4,24 +4,9 @@ const api = axios.create({
   baseURL: 'http://localhost:3001',
 });
 
-const login = async (name, surname, department) => {
+const login = async (name, surname, department, password) => {
   try {
     const response = await api.post('/login', {
-      name: name,
-      surname: surname,
-      department: department
-    });
-    console.log(response.data)
-    return response.data;
-  } catch (err) {
-    console.log(err)
-  }
-};
-
-
-const register  = async (name, surname, department, password) => {
-  try {
-    const response = await api.post('/register', {
       name: name,
       surname: surname,
       department: department,
@@ -34,6 +19,20 @@ const register  = async (name, surname, department, password) => {
   }
 };
 
+const register = async (name, surname, department, password) => {
+  try {
+    const response = await api.post('/register', {
+      name: name,
+      surname: surname,
+      department: department,
+      password: password,
+    });
+    console.log(response.data)
+    return response.data;
+  } catch (err) {
+    console.log(err)
+  }
+};
 
 const productData = async (value) => {
   const response = await axios.get("http://localhost:3001/products");
