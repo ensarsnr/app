@@ -5,7 +5,7 @@ import Order from './pages/Order'
 import Receiver from "./pages/Receiver";
 import FoodMenu from "./pages/FoodMenu";
 import Waiting from "./pages/Waiting";
-import Register from "./components/Register";
+import Register from "./pages/Register";
 
 //routerlar ile sayfalar arası geçişleri buradan ayarlıyoruz.
 function App() {

@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { EMPTY_ERROR, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, LOGIN_ERROR, REGISTER_FORM, USER_PASSWORD } from '../constants/constText';
 import { Link, useNavigate } from 'react-router-dom';
-import { login, register, } from '../service/service';
+import { login } from '../service/service';
 
 function Form() {
 
@@ -42,21 +42,18 @@ function Form() {
     try {
       const response = await login(name, surname, department, password);
       if (response === "Login successful!") {
-        if (
-          department.toLowerCase() === "Çay Ocaği".toLowerCase() ||
-          department.toLowerCase() === "Çay Ocağı".toLowerCase()) {
-          localStorage.setItem("surname", surname)
-          navigate("/receiver")
 
-        }
-
-        else {
-          navigate("order");
-          localStorage.setItem("name", name);
-          localStorage.setItem("surname", surname);
-          console.log(response)
-        }
+        navigate("order");
+        localStorage.setItem("name", name);
+        localStorage.setItem("surname", surname);
       }
+      else {
+        navigate("order");
+        localStorage.setItem("name", name);
+        localStorage.setItem("surname", surname);
+        console.log(response)
+      }
+
       // Giriş yapılamadıysa, bir hata mesajı yazdırıyoruz.
     } catch (error) {
       console.log("hatalı isim falan")
@@ -100,7 +97,10 @@ function Form() {
           />
         </div>
         <div className="mb-4">
-          <select value={department} onChange={(e) => setDepartment(e.target.value)} className="form-select form-select-lg w-75 m-auto" >
+          <select
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+            className="form-select form-select-lg w-75 m-auto" >
             {departments.map((e) => (
               <option key={e}>{e}</option>
             ))}
@@ -121,3 +121,9 @@ function Form() {
 }
 
 export default Form;
+
+
+
+
+
+

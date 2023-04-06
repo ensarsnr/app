@@ -12,7 +12,7 @@ const login = async (name, surname, department, password) => {
       department: department,
       password: password
     });
-    console.log(response.data)
+    console.log(response.data) // console'da response'ın datasını göstermeye yarıyorke
     return response.data;
   } catch (err) {
     console.log(err)
