@@ -1,4 +1,4 @@
-Yapılacaklar
+# Yapılacaklar
 
 - veritabanına quantity artış şeysini ekle veritabanından kullanırsın onu.
 - Çay ocağı kısmında ise gönderildi alındı kısımları yeşil kırmızı olacak şekilde ayarlamak lazım
