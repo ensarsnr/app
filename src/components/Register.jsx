@@ -32,8 +32,8 @@ function Register() {
 
 
         try {
-            const response = await register(name, surname, department, number, password);
-            if (response === "Register successful!")
+            const response = await register(name, surname, department, password, number);
+            if (response === "OK")
                 navigate("/")
         } catch (error) {
             console.log(error)

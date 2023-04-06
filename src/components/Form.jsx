@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { EMPTY_ERROR, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, LOGIN_ERROR, REGISTER_FORM, USER_PASSWORD } from '../constants/constText';
 import { Link, useNavigate } from 'react-router-dom';
-import { login, register, } from '../service/service';
+import { login } from '../service/service';
 
 function Form() {
 
@@ -12,11 +12,11 @@ function Form() {
   // Daha düzgün olur şimidlik kalsın böyle
   const navigate = useNavigate();
 
+  const [password, setPassword] = useState("");
   const [name, setname] = useState("");
   const [surname, setSurname] = useState("");
   const [department, setDepartment] = useState("");
   const [error, setError] = useState("");
-  const [password, setPassword] = useState("");
 
   const departments = [
     "Çay Ocağı",
@@ -28,7 +28,7 @@ function Form() {
 
   const handleClick = async () => {
     // Inputlar boşsa diğer sayfaya geçişi engelliyoruz.
-    if (!name || !surname || !department || !password) {
+    if (!name || !surname || !department || !password ) {
       // Inputlar boşsa, uyarı mesajı yazdırıyoruz.
       const errorMessage = document.createElement('p');
       errorMessage.style.color = 'red';
@@ -92,12 +92,13 @@ function Form() {
           />
         </div>
         <div className='mb-4'>
-          <TextField
-            value={password}
+            <TextField 
+            value={password} 
             onChange={(e) => setPassword(e.target.value)}
             className='bg-light w-75'
             label={USER_PASSWORD}
-          />
+            variant='outlined'
+            /> 
         </div>
         <div className="mb-4">
           <select value={department} onChange={(e) => setDepartment(e.target.value)} className="form-select form-select-lg w-75 m-auto" >
