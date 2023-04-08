@@ -1,6 +1,8 @@
 # Yapılacaklar
 
-- şekerli açık kapalı çay kahve çeşidi olsun orta şekerli sade falan
+
+- çay ocağına göre filtreleme yapolması lazım mesela a çalışanına a tarafından bilgiler b çalışanına b tarafından vs vs
+- şekerli açık kapalı çay kahve çeşidi olsun orta şekerli sade falan (ekranda popup çıkarız siparişi tamamla dedikten sonra ne kadar kahve varsa o kdadar seçenek)
 - Linklere hover ekleriz.
 - veritabanına quantity artış şeysini ekle veritabanından kullanırsın onu.
 - Çay ocağı kısmında ise gönderildi alındı kısımları yeşil kırmızı olacak şekilde ayarlamak lazım
