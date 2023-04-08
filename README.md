@@ -1,5 +1,6 @@
 # Yapılacaklar
 
+- şekerli açık kapalı çay kahve çeşidi olsun orta şekerli sade falan
 - Linklere hover ekleriz.
 - veritabanına quantity artış şeysini ekle veritabanından kullanırsın onu.
 - Çay ocağı kısmında ise gönderildi alındı kısımları yeşil kırmızı olacak şekilde ayarlamak lazım
