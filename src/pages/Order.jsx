@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import AppBar from '../components/AppBar';
 import OrderMenu from '../components/OrderMenu';
 import OrderSelected from '../components/OrderSelected';
-import { CHOOSEN_ONES, CHOOSE_ORDER, EXIT_APPBAR, FOOD_MENU, WELCOME_USER } from '../constants/constText';
+import { CHOOSEN_ONES, CHOOSE_ORDER, EXIT_APPBAR, FOOD_MENU, MY_ORDERS, WELCOME_USER } from '../constants/constText';
 import "../Deneme.css"
 
 function Order() {
@@ -36,7 +36,11 @@ function Order() {
                         </Link>
                     </div>
                 }
-
+                myOrders={
+                    <div>
+                        <Link to={"/order/waiting"} className='text-light text-decoration-none'>{MY_ORDERS}</Link>
+                    </div>
+                }
             />
             {/* == AppBar == */}
 

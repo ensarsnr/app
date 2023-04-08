@@ -12,13 +12,14 @@ function Form() {
   // Daha düzgün olur şimidlik kalsın böyle
   const navigate = useNavigate();
 
+  const [password, setPassword] = useState("");
   const [name, setname] = useState("");
   const [surname, setSurname] = useState("");
   const [department, setDepartment] = useState("");
   const [error, setError] = useState("");
-  const [password, setPassword] = useState("");
 
   const departments = [
+    "Departman Seçiniz",
     "Çay Ocağı",
     "AR-GE",
     "ÜR-GE",
@@ -42,16 +43,17 @@ function Form() {
     try {
       const response = await login(name, surname, department, password);
       if (response === "Login successful!") {
-
-        navigate("order");
-        localStorage.setItem("name", name);
-        localStorage.setItem("surname", surname);
-      }
-      else {
-        navigate("order");
-        localStorage.setItem("name", name);
-        localStorage.setItem("surname", surname);
-        console.log(response)
+        if (department === "Çay Ocağı") {
+          localStorage.setItem("name", name);
+          localStorage.setItem("surname", surname);
+          navigate("/receiver");
+        }
+        else {
+          navigate("order");
+          localStorage.setItem("name", name);
+          localStorage.setItem("surname", surname);
+          console.log(response)
+        }
       }
 
       // Giriş yapılamadıysa, bir hata mesajı yazdırıyoruz.
@@ -68,9 +70,10 @@ function Form() {
 
 
   return (
-    <Paper elevation={1} style={{ marginTop: "150px" }} className=" w-75">
-      <form id='form' style={{ padding: "50px 20px 50px 20px" }} className="text-center">
-        <div className="mb-4">
+    <Paper elevation={1} style={{ marginTop: "50px" }} className="text-center w-75">
+      <h1 className='pt-3'>Giriş Sayfası</h1>
+      <form id='form' className="text-center">
+        <div className="p-1">
           <TextField
             value={name}
             onChange={(e) => setname(e.target.value)}
@@ -79,7 +82,7 @@ function Form() {
             variant="outlined"
           />
         </div>
-        <div className="mb-4">
+        <div className="p-1">
           <TextField
             value={surname}
             onChange={(e) => setSurname(e.target.value)}
@@ -88,15 +91,16 @@ function Form() {
             variant="outlined"
           />
         </div>
-        <div className='mb-4'>
+        <div className='p-1'>
           <TextField
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className='bg-light w-75'
             label={USER_PASSWORD}
+            variant='outlined'
           />
         </div>
-        <div className="mb-4">
+        <div className="p-1">
           <select
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
@@ -106,7 +110,7 @@ function Form() {
             ))}
           </select>
         </div>
-        <div className="mb-4 text-center w-100">
+        <div className="p-1 text-center w-100">
           <Button onClick={handleClick} variant="warning" className="w-75">
             <span className='text-dark'>{LOGIN_BUTTON}</span>
           </Button>
@@ -114,7 +118,7 @@ function Form() {
             <Link to={"register"} className='text-decoration-none'>{REGISTER_FORM}</Link>
           </div>
         </div>
-        {error && <div className="text-danger mb-4">{error}</div>}
+        {error && <div className="text-danger p-1">{error}</div>}
       </form>
     </Paper>
   );

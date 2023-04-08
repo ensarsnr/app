@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
-import { COMPLETED_ORDER_BUTTON } from '../constants/constText';
+import { COMPLETED_ORDER_BUTTON, LIMITED_ERROR } from '../constants/constText';
 import { destroyItem, removeAllItems } from '../redux/slices/itemsSlice';
 import success from "../assets/animation/111541-successful-tick.json"
 import unSucces from "../assets/animation/unnsuccess.json"
@@ -10,92 +10,107 @@ import { useNavigate } from 'react-router';
 import { selectOrder } from '../service/service';
 
 function OrderSelected() {
-    const [unSuccesful, setUnSuccessful] = useState(false);
+    const menuItemsLength = 4;
+
+    const [unSuccessful, setUnSuccessful] = useState(false);
     const [successful, setSuccessful] = useState(false);
     const [show, setShow] = useState(false);
-    const [count, setCount] = useState(0);
-    
-    const menuItemsLength = 4;    
+    const [itemCounts, setItemCount] = useState({});
 
     const navigate = useNavigate();
 
-
     const dispatch = useDispatch();
-    // itemsSlice'dan aldığımız verileri bu hook sayesinde bu component'e çekiyoruz.
-    // items değişkenine atandı.
     const items = useSelector((state) => state.items.elements);
-    // çarpılara tıklandığında item'ın silinmesine yarayan fonksiyon
-    const handleDestroy = (index) => dispatch(destroyItem(index));
+
+    const handleDestroy = (index) => {
+        dispatch(destroyItem(index));
+        setItemCount((prev) => ({
+            ...prev,
+            [items[index]]: 0
+        }));
+    };
 
     const handleSend = (e) => {
         if (items.length <= 0) {
-            // hiç bir öğe seçilmediyse bu koşul harekete geçiyor ve
-            // başarısız oldun (X) animasyonu harekete geçiyor.
             setUnSuccessful(true);
-            setTimeout(() => setUnSuccessful(false), 3900)
+            setTimeout(() => setUnSuccessful(false), 3900);
         } else if (items.length <= menuItemsLength) {
-            // bu koşulda ise menuden seçim yapıldıysa ve sipariş için
-            // button'a tıklandıysa ekranda başarılı oldu gibisinden
-            // yeşil bir animasyon çıkıyor. Ve bekleme sayfasına yönlendiriyor.
             setSuccessful(true);
             setTimeout(() => {
-                setSuccessful(false)
-                navigate("waiting")
-            }, 3400)
-            console.log(items);
-            dispatch(removeAllItems())
-            items.map((e) => selectOrder(e, localStorage.getItem("name")))
+                setSuccessful(false);
+                navigate("waiting");
+            }, 3400);
+            dispatch(removeAllItems());
+            items.forEach((e, index) => selectOrder(e, localStorage.getItem("name"), String(itemCounts[e])));
         } else {
-            console.log("Sınırı aştın")
             setShow(true);
         }
-        // items.map((e) => console.log(e));
-    }
+    };
 
+    const decrementss = (e) => {
+        const newItemCounts = { ...itemCounts };
+        newItemCounts[e] = newItemCounts[e] ? newItemCounts[e] - 1 : 1;
+        setItemCount(newItemCounts);
+    };
 
     const increment = (e) => {
-        setCount(count + 1)
-    }
+        const newItemCounts = { ...itemCounts };
+        newItemCounts[e] = newItemCounts[e] ? newItemCounts[e] + 1 : 1;
+        setItemCount(newItemCounts);
+    };
+
+
 
     return (
-        <div className='row d-flex justify-content-center'>
-            <div className='col-12 mt-5 w-50'>
-                <ul className='list-group'>
+        <div className="row d-flex justify-content-center">
+            <div className="col-12 mt-5 w-50">
+                <ul className="list-group">
                     {items.map((e, i) => (
                         <li
                             key={i}
                             className="
-                                row    
-                                list-group-item mb-1 d-flex  
-                                justify-content-between  
-                                align-items-center
-                            ">
-                            <div className='col-6'>
-                            {e} ({count})
+                  row    
+                  list-group-item mb-1 d-flex  
+                  justify-content-between  
+                  align-items-center
+                "
+                        >
+                            <div className="col-6">
+                                {e} ({itemCounts[e] || 1})
                             </div>
-                            <div className='col-6 '>
-
-                            <span 
-                                className='
-                                    badge 
-                                    rounded-pill 
-                                    text-dark' 
-                                onClick={() => increment(e)} 
-                                style={{
-                                    fontSize: "20px", 
-                                    cursor:"pointer"
+                            <div className="col-6 ">
+                                <span
+                                    onClick={() => decrementss(e)}
+                                    style={{
+                                        fontSize: "20px",
+                                        cursor: "pointer"
                                     }}
-                                >+</span>
-
-                            <span
-                                onClick={() => handleDestroy(i)}
-                                className='
-                                    badge  
-                                    destroy 
-                                    rounded-pill'
-                            >
-                                X
-                            </span>
+                                    className="badge rounded-pill text-dark"
+                                >
+                                    -
+                                </span>
+                                <span
+                                    className="
+                      badge 
+                      rounded-pill 
+                      text-dark"
+                                    onClick={() => increment(e)}
+                                    style={{
+                                        fontSize: "20px",
+                                        cursor: "pointer"
+                                    }}
+                                >
+                                    +
+                                </span>
+                                <span
+                                    onClick={() => handleDestroy(i)}
+                                    className='
+                      badge  
+                      destroy 
+                      rounded-pill'
+                                >
+                                    X
+                                </span>
                             </div>
                         </li>
                     ))}
@@ -111,7 +126,7 @@ function OrderSelected() {
             <div className='mt-5 col-12 '>
                 {show && (
                     <Alert onClose={() => setShow(false)} variant="danger" dismissible>
-                        Limit 3 adet
+                        {LIMITED_ERROR}
                     </Alert>
                 )}
             </div>
@@ -131,7 +146,7 @@ function OrderSelected() {
                     <Animations animation={success} />
                 </div>
             )}
-            {unSuccesful && (
+            {unSuccessful && (
                 <div
                     style={{
                         position: "fixed",

@@ -16,9 +16,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/order" element={<Order />} />
           <Route path="/receiver" element={<Receiver />} />
-          <Route path="order/waiting" element={<Waiting />} />
-          <Route path="order/foodMenu" element={<FoodMenu />} />
-          <Route path="order/waiting/menu" element={<FoodMenu />} />
+          <Route path="/order/waiting" element={<Waiting />} />
+          <Route path="/order/foodMenu" element={<FoodMenu />} />
+          <Route path="/order/waiting/menu" element={<FoodMenu />} />
           <Route path="register" element={<Register />} />
         </Routes>
       </BrowserRouter>

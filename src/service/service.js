@@ -40,18 +40,20 @@ const productData = async (value) => {
   value(response.data)
 }
 
-const selectOrder = async (product_name, user_name) => {
+const selectOrder = async (product_name, user_name, quantity) => {
   try {
     const response = await api.post('/orders', {
       product_name: product_name,
-      user_name: user_name
+      user_name: user_name,
+      quantity: quantity,
     });
     console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);
   }
-}
+};
+
 
 
 

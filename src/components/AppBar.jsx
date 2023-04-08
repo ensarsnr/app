@@ -13,11 +13,17 @@ function AppBar(props) {
       <div className="col-4">
         {props.name}
       </div>
-      <div className="row col-4">
-        <div className="col-6">
+      <div style={{
+        display: "flex",
+        justifyContent: "space-evenly"
+      }} className="col-4">
+        <div>
+          {props.myOrders}
+        </div>
+        <div>
           {props.foodMenu}
         </div>
-        <div className="col-6">
+        <div>
           {props.element}
         </div>
       </div>

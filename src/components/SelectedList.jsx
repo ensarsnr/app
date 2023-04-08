@@ -36,20 +36,20 @@ function SelectedList() {
                         if (name.toLowerCase() === e.user_name.toLowerCase()) {
                             return (
                                 <li style={{ listStyle: "none" }} key={i}>
-                                <div className='card mb-2'>
-                                    <div
-                                        className='card-body'
-                                        style={{
-                                            display: "flex",
-                                            justifyContent: "space-between"
-                                        }}
-                                    >
-                                        <div>{e.user_name.toUpperCase()}</div>
-                                        <div>{e.product_name}</div>
-                                        <div>{new Date(e.order_date).toLocaleString()}</div>
+                                    <div className='card mb-2'>
+                                        <div
+                                            className='card-body'
+                                            style={{
+                                                display: "flex",
+                                                justifyContent: "space-between"
+                                            }}
+                                        >
+                                            <div>{e.user_name.toUpperCase()}</div>
+                                            <div>{e.product_name}</div>
+                                            <div>{new Date(e.order_date).toLocaleString()}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
                             )
                         }
                     })

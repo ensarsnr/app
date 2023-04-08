@@ -4,13 +4,12 @@ import React, { useEffect, useState } from 'react'
 import { EXIT_APPBAR, FOOD_MENU, LABEL_SEARCH, WELCOME_USER } from '../constants/constText'
 import { TextField } from '@mui/material'
 import axios from 'axios'
-import { Button, Container } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 
 function Receiver() {
-    const name = localStorage.getItem("name")
+    const name = localStorage.getItem("name");
     const surname = localStorage.getItem("surname")
     const [search, setSearch] = useState("");
-    const [activeIndex, setActiveIndex] = useState(-1);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -35,9 +34,7 @@ function Receiver() {
                             {EXIT_APPBAR}
                         </Link>
                     </div>}
-                name={
-                    <div className='text-center'>{WELCOME_USER}{name.toUpperCase()} {surname.toUpperCase()}</div>
-                }
+                name={name ? <div className='text-center'>{WELCOME_USER}{name.toUpperCase()} {surname.toUpperCase()}</div> : ""}
                 foodMenu={
                     <div className='float-end'>
                         <Link to="foodMenu" className="text-light text-decoration-none">
@@ -70,14 +67,7 @@ function Receiver() {
                                         <div>{e.user_name.toUpperCase()}</div>
                                         <div>{e.product_name}</div>
                                         <div>{new Date(e.order_date).toLocaleString()}</div>
-                                        <div>
-                                            <Button
-                                                onClick={() => setActiveIndex(i)}
-                                                variant={i === activeIndex ? 'primary' : 'secondary'}
-                                            >
-                                                {i === activeIndex ? 'Active' : 'Passive'}
-                                            </Button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </li>

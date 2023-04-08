@@ -1,12 +1,28 @@
 body {
-    background: url(assets/img/tai9.jpg);
+  background: url(assets/img/tai9.jpg);
 }
 
 .destroy {
   color: #4e4d4d;
 }
-  .destroy:hover {
-    cursor: pointer;
-    color: black;
-  }
-  
+
+.destroy:hover {
+  cursor: pointer;
+  color: black;
+}
+
+
+.load {
+  position: absolute;
+  width: 600px;
+  height: 36px;
+  left: 50%;
+  top: 40%;
+  margin-left: -300px;
+  overflow: visible;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}

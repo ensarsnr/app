@@ -11,7 +11,10 @@ export const itemsSlice = createSlice({
         // bu action'ı kullanarak elements dizisine eleman atıyoruz bu diziyide istediğimiz
         // component'ta useSelector ile kullanabiliriz.
         addItem: (state, action) => {
-            state.elements.push(action.payload);
+            // Eğer state içinde aynı item zaten varsa eklemeyi yapma
+            if (!state.elements.includes(action.payload)) {
+                state.elements.push(action.payload);
+            }
         },
         // bu action ise elements içindeki elemanları indexine göre silme işlemini yapıyor.
         destroyItem: (state, action) => {
