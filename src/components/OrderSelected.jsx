@@ -68,15 +68,10 @@ function OrderSelected() {
                     {items.map((e, i) => (
                         <li
                             key={i}
-                            className="
-                  row    
-                  list-group-item mb-1 d-flex  
-                  justify-content-between  
-                  align-items-center
-                "
+                            className="row list-group-item mb-1 d-flex justify-content-between align-items-center"
                         >
                             <div className="col-6">
-                                {e} ({itemCounts[e] || 1})
+                                {e} ({itemCounts[e] || 0})
                             </div>
                             <div className="col-6 ">
                                 <span
@@ -90,10 +85,7 @@ function OrderSelected() {
                                     -
                                 </span>
                                 <span
-                                    className="
-                      badge 
-                      rounded-pill 
-                      text-dark"
+                                    className="badge rounded-pill text-dark"
                                     onClick={() => increment(e)}
                                     style={{
                                         fontSize: "20px",
@@ -104,10 +96,7 @@ function OrderSelected() {
                                 </span>
                                 <span
                                     onClick={() => handleDestroy(i)}
-                                    className='
-                      badge  
-                      destroy 
-                      rounded-pill'
+                                    className='badge destroy rounded-pill'
                                 >
                                     X
                                 </span>
