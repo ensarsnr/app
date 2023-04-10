@@ -1,5 +1,6 @@
 # Yapılacaklar
 
+- herkes tek bir kişiye sipariş vermicek bölüm bölüm ayrılacaklar...
 - UI dostu sipariş seçenekleri basıldıkça arttırma.
 - çay ocağına göre filtreleme yapolması lazım mesela a çalışanına a tarafından bilgiler b çalışanına b tarafından vs vs
 - şekerli açık kapalı çay kahve çeşidi olsun orta şekerli sade falan (ekranda popup çıkarız siparişi tamamla dedikten sonra ne kadar kahve varsa o kdadar seçenek)
