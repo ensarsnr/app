@@ -71,7 +71,7 @@ function OrderSelected() {
                             className="row list-group-item mb-1 d-flex justify-content-between align-items-center"
                         >
                             <div className="col-6">
-                                {e} ({itemCounts[e] || 0})
+                                {e} ({itemCounts[e] || 1})
                             </div>
                             <div className="col-6 ">
                                 <span
