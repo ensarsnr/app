@@ -9,6 +9,9 @@ function OrderMenu() {
 
     const [data, setData] = useState([]);
 
+    // Her liste elemanı için ayrı sayaçlar eklemek için bir state nesnesi kullanıyoruz.
+    const [count, setCount] = useState({});
+
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get("http://localhost:3001/products");
@@ -18,16 +21,23 @@ function OrderMenu() {
     }, [])
 
     const handleClick = (e) => {
-        console.log(e.target.textContent)
-        //diziden seçtiğimiz ürünleri itemsSlice dosyasında ki elements'in içine
-        // addItem actionu ile diziye pushluyoruz.
-        dispatch(addItem(e.target.textContent));
+        const itemName = e.target.textContent;
+
+        // Seçilen ürünü itemsSlice dosyasındaki elements dizisine ekliyoruz.
+        dispatch(addItem(itemName));
+
+        // Tıklanan elemanın sayaç değerini bir artırıyoruz.
+        // Eğer sayaç daha önce tanımlanmamışsa, 1 değeri ile başlatıyoruz.
+        setCount(prevCount => ({
+            ...prevCount,
+            [itemName]: (prevCount[itemName] || 0) + 1
+        }));
 
         // Tıklanan elemanın "onClick" özelliğini kaldırıyoruz.
+        e.target.onclick = null;
     }
 
-    // dizideki elemanları ekranda gösterip tıklama özelliği ekliyoruz.
-    // elemanlara tıklandıkça dispatch ile hazırladıüımız slice'a gönderiyoruz.
+    console.log(count)
     return (
         <div className='d-flex justify-content-center'>
             <div className='mt-5 w-50'>
