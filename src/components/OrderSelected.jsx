@@ -41,7 +41,7 @@ function OrderSelected() {
                 navigate("waiting");
             }, 3400);
             dispatch(removeAllItems());
-            items.forEach((e, index) => selectOrder(e, localStorage.getItem("name"), String(itemCounts[e])));
+            items.forEach((e, index) => selectOrder(e, localStorage.getItem("name"), String(itemCounts[e]), "Bekleniyor"));
         } else {
             setShow(true);
         }

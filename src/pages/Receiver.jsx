@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { EXIT_APPBAR, FOOD_MENU, LABEL_SEARCH, WELCOME_USER } from '../constants/constText'
 import { TextField } from '@mui/material'
 import axios from 'axios'
-import { Container } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
 
 function Receiver() {
     const name = localStorage.getItem("name");
@@ -20,10 +20,20 @@ function Receiver() {
         fetchData();
     }, [])
 
+    const handleOrderButtonClick = async (id) => {
+        const newData = data.map(e => {
+            if (e.id === id) {
+                // Tıklanan elemanın is_order property'sini güncelle
+                return { ...e, is_order: "Verildi" };
+            } else {
+                return e;
+            }
+        });
 
+        setData(newData);
+    }
 
     const filteredData = data.filter(e => e.user_name.toLowerCase().includes(search.toLowerCase()));
-
 
     return (
         <div>
@@ -64,10 +74,14 @@ function Receiver() {
                                             justifyContent: "space-between"
                                         }}
                                     >
-                                        <div>{e.user_name.toUpperCase()}</div>
-                                        <div>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
-                                        <div>{new Date(e.order_date).toLocaleString()}</div>
-
+                                        <div className='col-3'>{e.user_name.toUpperCase()}</div>
+                                        <div className='col-3'>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
+                                        <div className='col-3'>{new Date(e.order_date).toLocaleString()}</div>
+                                        <div className='col-3'>
+                                            <Button variant={
+                                                e.is_order === "Bekleniyor" ? "success" : "danger"
+                                            } className='w-100' onClick={() => handleOrderButtonClick(e.id)}>{e.is_order}</Button>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
