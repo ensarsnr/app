@@ -45,7 +45,7 @@ function SelectedList() {
                                             }}
                                         >
                                             <div>{e.user_name.toUpperCase()}</div>
-                                            <div>{e.product_name}</div>
+                                            <div>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
                                             <div>{new Date(e.order_date).toLocaleString()}</div>
                                         </div>
                                     </div>
