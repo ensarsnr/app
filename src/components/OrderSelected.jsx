@@ -20,7 +20,11 @@ function OrderSelected() {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
+    const count = useSelector((state) => state.items.count);
     const items = useSelector((state) => state.items.elements);
+
+    console.log(count)
+
 
     const handleDestroy = (index) => {
         dispatch(destroyItem(index));

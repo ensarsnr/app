@@ -1,29 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
-
 export const itemsSlice = createSlice({
     name: 'items',
     initialState: {
-        elements: []
+        elements: [],
+        count: 0 // Yeni eklenen count değeri
     },
     reducers: {
-        // bu action'ı kullanarak elements dizisine eleman atıyoruz bu diziyide istediğimiz
-        // component'ta useSelector ile kullanabiliriz.
         addItem: (state, action) => {
-            // Eğer state içinde aynı item zaten varsa eklemeyi yapma
             if (!state.elements.includes(action.payload)) {
                 state.elements.push(action.payload);
+                state.count += 1; // Eleman eklenince count'i artırıyoruz
             }
         },
-        // bu action ise elements içindeki elemanları indexine göre silme işlemini yapıyor.
         destroyItem: (state, action) => {
             const indexToDelete = action.payload;
             state.elements.splice(indexToDelete, 1);
+            state.count -= 1; // Eleman silince count'i azaltıyoruz
         },
-        // elements dizisindeki bütün elemanları siliyor, sıfırlıyor.
         removeAllItems: (state) => {
-            state.elements.splice(0, state.elements.length)
+            state.elements.splice(0, state.elements.length);
+            state.count = 0; // Tüm elemanlar silinince count'i sıfırlıyoruz
         }
     }
 })

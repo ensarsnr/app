@@ -54,7 +54,7 @@ function OrderMenu() {
                                 justify-content-between  
                                 align-items-center"
                         >
-                            {e.name}
+                            {e.name} {count[e.name] || 0}
                         </li>
                     ))}
                 </ul>
