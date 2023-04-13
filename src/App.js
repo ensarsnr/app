@@ -19,7 +19,7 @@ function App() {
           <Route path="/order/waiting" element={<Waiting />} />
           <Route path="/order/foodMenu" element={<FoodMenu />} />
           <Route path="/order/waiting/menu" element={<FoodMenu />} />
-          <Route path="register" element={<Register />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </>

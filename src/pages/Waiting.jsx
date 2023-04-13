@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import AppBar from '../components/AppBar'
 import WaitingAnimation from '../components/WaitingAnimation'
 import SelectedList from '../components/SelectedList'
-import { ALERT_HEADING, EXIT_APPBAR, FOOD_MENU } from '../constants/constText'
+import { ALERT_HEADING, EXIT_APPBAR, FOOD_MENU, ORDER_LINK, WAITING_ORDER } from '../constants/constText'
 import { Alert } from 'react-bootstrap'
 import { useState } from 'react'
 
@@ -21,7 +21,7 @@ function Waiting() {
                 }
                 name={
                     <div className='text-center'>
-                        Lutfen siparişinizi bekleyiniz..
+                        {WAITING_ORDER}
                     </div>
                 }
                 foodMenu={
@@ -33,7 +33,7 @@ function Waiting() {
                 }
                 myOrders={
                     <div>
-                        <Link to={"/order"} className='text-light text-decoration-none'>Sipariş</Link>
+                        <Link to={"/order"} className='text-light text-decoration-none'>{ORDER_LINK}</Link>
                     </div>
                 }
             />

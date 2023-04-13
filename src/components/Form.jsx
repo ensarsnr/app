@@ -1,7 +1,7 @@
 import { Paper, TextField } from '@mui/material';
 import { Button } from 'react-bootstrap';
 import React, { useState } from 'react';
-import { EMPTY_ERROR, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, LOGIN_ERROR, REGISTER_FORM, USER_PASSWORD } from '../constants/constText';
+import { EMPTY_ERROR, ENTER_SITE, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, LOGIN_ERROR, REGISTER_FORM, USER_PASSWORD, WRONG_ERROR } from '../constants/constText';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../service/service';
 import { useDispatch } from 'react-redux';
@@ -32,15 +32,19 @@ function Form() {
   ]
 
 
+  const errorsMessage = (message) => {
+    const errorMessage = document.createElement('p');
+    errorMessage.style.color = 'red';
+    setError(message)
+    document.getElementById('form').appendChild(errorMessage)
+  }
+
+
   const handleClick = async () => {
     // Inputlar boşsa diğer sayfaya geçişi engelliyoruz.
     if (!name || !surname || !department || !password) {
       // Inputlar boşsa, uyarı mesajı yazdırıyoruz.
-      const errorMessage = document.createElement('p');
-      errorMessage.style.color = 'red';
-      setError(EMPTY_ERROR);
-      document.getElementById('form').appendChild(errorMessage);
-
+      errorsMessage(EMPTY_ERROR);
       return;
     }
 
@@ -61,17 +65,15 @@ function Form() {
           dispatch(changeDepartment(department));
           console.log(response)
           console.log(department)
-          navigate("order");
+          navigate("/order");
         }
-      }
+        // Kullanıcının yazdığı bilgiler uyuşmuyorsa bulunamadıysa database'de bu hatayı döndürüyor..
+      } else if (response === "not found") { errorsMessage(WRONG_ERROR) }
+
 
       // Giriş yapılamadıysa, bir hata mesajı yazdırıyoruz.
     } catch (error) {
-      console.log("hatalı isim falan")
-      const errorMessage = document.createElement('p');
-      errorMessage.style.color = 'red';
-      setError(LOGIN_ERROR);
-      document.getElementById('form').appendChild(errorMessage);
+      errorsMessage(LOGIN_ERROR)
       console.log(error);
       return
     }
@@ -80,7 +82,17 @@ function Form() {
 
   return (
     <Paper elevation={1} style={{ marginTop: "50px" }} className="text-center w-75">
-      <h1 className='pt-3'>Giriş Sayfası</h1>
+      <Paper elevation={3} sx={{
+        background: "red",
+        width: "70%",
+        margin: "auto",
+        position: "relative",
+        bottom: "20px",
+        borderRadius: "10px"
+
+      }}>
+        <h2 className='pt-2 p-3 text-center text-light'>{ENTER_SITE}</h2>
+      </Paper>
       <form id='form' className="text-center">
         <div className="p-1">
           <TextField
@@ -107,6 +119,7 @@ function Form() {
             className='bg-light w-75'
             label={USER_PASSWORD}
             variant='outlined'
+            type='password'
           />
         </div>
         <div className="p-1">

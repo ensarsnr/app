@@ -1,6 +1,6 @@
 import { Paper, TextField } from '@mui/material'
 import { Button, Col, Container, Row } from 'react-bootstrap'
-import { EMPTY_ERROR, ENTER_SITE, LABEL_NAME, LABEL_SURNAME, REGISTER_BUTTON, REGISTER_TITLE, USER_PASSWORD } from '../constants/constText'
+import { EMPTY_ERROR, ENTER_SITE, LABEL_NAME, LABEL_SURNAME, REGISTERED_ERROR, REGISTER_BUTTON, REGISTER_TITLE, USER_PASSWORD, WRONG_ERROR } from '../constants/constText'
 import { useState } from 'react';
 import { register } from '../service/service';
 import { useNavigate } from 'react-router';
@@ -23,7 +23,7 @@ function Register() {
     const [number, setNumber] = useState("");
 
     const departments = [
-        "Departman yazın",
+        "Departman Seçiniz",
         "Çay Ocağı",
         "Çay Ocağı(VIP)",
         "AR-GE",
@@ -41,7 +41,6 @@ function Register() {
 
     const handleClick = async () => {
         if (!name || !surname || !department || !password || !number) {
-            console.log("boş geçme")
             errorsMessage(EMPTY_ERROR)
             return;
         }
@@ -51,6 +50,11 @@ function Register() {
             const response = await register(name, surname, department, password, number);
             if (response === "OK") {
                 navigate("/")
+            } else if (response === "registered") {
+                errorsMessage(REGISTERED_ERROR)
+            }
+            else {
+                errorsMessage(WRONG_ERROR)
             }
         } catch (error) {
             console.log(error)
@@ -67,7 +71,16 @@ function Register() {
                         margin: "auto",
                         width: "35%"
                     }} elevation={3}>
-                        <h1 className='pt-2 text-center'>{REGISTER_TITLE}</h1>
+                        <Paper elevation={3} sx={{
+                            background: "red",
+                            width: "70%",
+                            margin: "auto",
+                            position: "relative",
+                            bottom: "20px",
+                            borderRadius: "10px"
+                        }}>
+                            <h2 className='p-3 pt-2 text-center text-light'>{REGISTER_TITLE}</h2>
+                        </Paper>
                         <form id='form' className='text-center'>
                             <div className='p-2 pt-3'>
                                 <TextField

@@ -84,12 +84,20 @@ function Receiver() {
                                                         {e.user_name.toUpperCase()}
                                                         <div className='text-danger' >({e.user_department})</div>
                                                     </div>
-                                                    <div className='col-2'>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
-                                                    <div className='col-2'>{new Date(e.order_date).toLocaleString()}</div>
                                                     <div className='col-2'>
-                                                        <Button variant={
-                                                            e.is_order === "Bekleniyor" ? "success" : "danger"
-                                                        } className='w-100' onClick={() => handleOrderButtonClick(e.id)}>{e.is_order}</Button>
+                                                        {e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}
+                                                    </div>
+
+                                                    <div className='col-2'>{new Date(e.order_date).toLocaleString()}</div>
+
+                                                    <div className='col-2'>
+                                                        <Button className='w-100' onClick={() => handleOrderButtonClick(e.id)}
+                                                            variant={
+                                                                e.is_order === "Bekleniyor" ? "success" : "danger"
+                                                            }
+                                                        >
+                                                            {e.is_order}
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </div>
