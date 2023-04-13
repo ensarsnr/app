@@ -5,7 +5,6 @@ import { EXIT_APPBAR, FOOD_MENU, LABEL_SEARCH, WELCOME_USER } from '../constants
 import { TextField } from '@mui/material'
 import axios from 'axios'
 import { Button, Container } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
 
 function Receiver() {
     const name = localStorage.getItem("name");
@@ -14,7 +13,6 @@ function Receiver() {
     const [data, setData] = useState([]);
 
 
-    const department = useSelector((state) => state.items.department);
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get("http://localhost:3001/getOrders");
