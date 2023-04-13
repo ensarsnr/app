@@ -1,6 +1,7 @@
 # Yapılacaklar
 
 - ~~herkes tek bir kişiye sipariş vermicek bölüm bölüm ayrılacaklar...~~
+- mesela nescafe'nin alt kısmına nescafe simgesi veya images icon falan eklenebilir. Çayın altına da o şekil
 - UI dostu sipariş seçenekleri basıldıkça arttırma.
 - şekerli açık kapalı çay kahve çeşidi olsun orta şekerli sade falan (ekranda popup çıkarız siparişi tamamla dedikten sonra ne kadar kahve varsa o kdadar seçenek)
 - Linklere hover ekleriz.
