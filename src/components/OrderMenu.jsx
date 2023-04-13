@@ -10,7 +10,7 @@ function OrderMenu() {
     const [data, setData] = useState([]);
 
     // Her liste elemanı için ayrı sayaçlar eklemek için bir state nesnesi kullanıyoruz.
-    const [count, setCount] = useState({});
+    // const [count, setCount] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,16 +28,17 @@ function OrderMenu() {
 
         // Tıklanan elemanın sayaç değerini bir artırıyoruz.
         // Eğer sayaç daha önce tanımlanmamışsa, 1 değeri ile başlatıyoruz.
-        setCount(prevCount => ({
-            ...prevCount,
-            [itemName]: (prevCount[itemName] || 0) + 1
-        }));
+
+        // setCount(prevCount => ({
+        //     ...prevCount,
+        //     [itemName]: (prevCount[itemName] || 0) + 1
+        // }));
 
         // Tıklanan elemanın "onClick" özelliğini kaldırıyoruz.
         e.target.onclick = null;
     }
 
-    console.log(count)
+    //console.log(count) console'da gösteriyor count'un değerini
     return (
         <div className='d-flex justify-content-center'>
             <div className='mt-5 w-50'>
@@ -54,7 +55,7 @@ function OrderMenu() {
                                 justify-content-between  
                                 align-items-center"
                         >
-                            {e.name} {count[e.name] || 0}
+                            {e.name}
                         </li>
                     ))}
                 </ul>

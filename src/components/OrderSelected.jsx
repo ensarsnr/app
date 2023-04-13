@@ -22,9 +22,9 @@ function OrderSelected() {
     const dispatch = useDispatch();
     const count = useSelector((state) => state.items.count);
     const items = useSelector((state) => state.items.elements);
-
+    const department = useSelector((state) => state.items.department)
     console.log(count)
-
+    console.log(department)
 
     const handleDestroy = (index) => {
         dispatch(destroyItem(index));
@@ -45,7 +45,8 @@ function OrderSelected() {
                 navigate("waiting");
             }, 3400);
             dispatch(removeAllItems());
-            items.forEach((e, index) => selectOrder(e, localStorage.getItem("name"), String(itemCounts[e]), "Bekleniyor"));
+            items.forEach((e, index) =>
+                selectOrder(e, localStorage.getItem("name"), String(itemCounts[e]), "Bekleniyor", department));
         } else {
             setShow(true);
         }

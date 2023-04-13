@@ -23,7 +23,9 @@ function Register() {
     const [number, setNumber] = useState("");
 
     const departments = [
+        "Departman yazın",
         "Çay Ocağı",
+        "Çay Ocağı(VIP)",
         "AR-GE",
         "ÜR-GE",
         "Muhasebe"

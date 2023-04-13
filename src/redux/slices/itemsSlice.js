@@ -4,9 +4,13 @@ export const itemsSlice = createSlice({
     name: 'items',
     initialState: {
         elements: [],
-        count: 0 // Yeni eklenen count değeri
+        count: 0,
+        department: "",
     },
     reducers: {
+        changeDepartment: (state, action) => {
+            state.department = action.payload;
+        },
         addItem: (state, action) => {
             if (!state.elements.includes(action.payload)) {
                 state.elements.push(action.payload);
@@ -25,6 +29,6 @@ export const itemsSlice = createSlice({
     }
 })
 
-export const { addItem, destroyItem, removeAllItems } = itemsSlice.actions
+export const { addItem, destroyItem, removeAllItems, changeDepartment } = itemsSlice.actions
 
 export default itemsSlice.reducer

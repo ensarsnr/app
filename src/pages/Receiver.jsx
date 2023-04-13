@@ -5,6 +5,7 @@ import { EXIT_APPBAR, FOOD_MENU, LABEL_SEARCH, WELCOME_USER } from '../constants
 import { TextField } from '@mui/material'
 import axios from 'axios'
 import { Button, Container } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 
 function Receiver() {
     const name = localStorage.getItem("name");
@@ -12,6 +13,8 @@ function Receiver() {
     const [search, setSearch] = useState("");
     const [data, setData] = useState([]);
 
+
+    const department = useSelector((state) => state.items.department);
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get("http://localhost:3001/getOrders");
@@ -64,28 +67,67 @@ function Receiver() {
                 </div>
                 <ul style={{ display: "flex", flexDirection: "column-reverse" }} >
                     {
-                        filteredData.map((e, i) => (
-                            <li style={{ listStyle: "none" }} key={i}>
-                                <div className='card mb-2'>
-                                    <div
-                                        className='card-body'
-                                        style={{
-                                            display: "flex",
-                                            justifyContent: "space-between"
-                                        }}
-                                    >
-                                        <div className='col-3'>{e.user_name.toUpperCase()}</div>
-                                        <div className='col-3'>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
-                                        <div className='col-3'>{new Date(e.order_date).toLocaleString()}</div>
-                                        <div className='col-3'>
-                                            <Button variant={
-                                                e.is_order === "Bekleniyor" ? "success" : "danger"
-                                            } className='w-100' onClick={() => handleOrderButtonClick(e.id)}>{e.is_order}</Button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        ))
+                        filteredData.map((e, i) => {
+                            if (department === "Çay Ocağı(VIP)") {
+                                if (e.user_department === "AR-GE" || e.user_department === "Muhasebe") {
+                                    return (
+                                        <li style={{ listStyle: "none" }} key={i}>
+                                            <div className='card mb-2'>
+                                                <div
+                                                    className='card-body'
+                                                    style={{
+                                                        display: "flex",
+                                                        justifyContent: "space-between"
+                                                    }}
+                                                >
+                                                    <div className=' col-2'>
+                                                        {e.user_name.toUpperCase()}
+                                                        <div className='text-danger' >({e.user_department})</div>
+                                                    </div>
+                                                    <div className='col-2'>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
+                                                    <div className='col-2'>{new Date(e.order_date).toLocaleString()}</div>
+                                                    <div className='col-2'>
+                                                        <Button variant={
+                                                            e.is_order === "Bekleniyor" ? "success" : "danger"
+                                                        } className='w-100' onClick={() => handleOrderButtonClick(e.id)}>{e.is_order}</Button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    )
+                                }
+                            } else {
+                                if (e.user_department === "ÜR-GE") {
+                                    return (
+                                        <li style={{ listStyle: "none" }} key={i}>
+                                            <div className='card mb-2'>
+                                                <div
+                                                    className='card-body'
+                                                    style={{
+                                                        display: "flex",
+                                                        justifyContent: "space-between"
+                                                    }}
+                                                >
+                                                    <div className=' col-2'>
+                                                        {e.user_name.toUpperCase()}
+                                                        <div className='text-danger' >({e.user_department})</div>
+                                                    </div>
+                                                    <div className='col-2'>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
+                                                    <div className='col-2'>{new Date(e.order_date).toLocaleString()}</div>
+                                                    <div className='col-2'>
+                                                        <Button variant={
+                                                            e.is_order === "Bekleniyor" ? "success" : "danger"
+                                                        } className='w-100' onClick={() => handleOrderButtonClick(e.id)}>{e.is_order}</Button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    )
+                                }
+                            }
+                        }
+
+                        )
                     }
                 </ul>
             </Container>

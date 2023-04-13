@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { EMPTY_ERROR, LABEL_NAME, LABEL_SURNAME, LOGIN_BUTTON, LOGIN_ERROR, REGISTER_FORM, USER_PASSWORD } from '../constants/constText';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../service/service';
+import { useDispatch } from 'react-redux';
+import { changeDepartment } from '../redux/slices/itemsSlice';
 
 function Form() {
 
@@ -12,15 +14,18 @@ function Form() {
   // Daha düzgün olur şimidlik kalsın böyle
   const navigate = useNavigate();
 
+  // HOOKS
   const [password, setPassword] = useState("");
   const [name, setname] = useState("");
   const [surname, setSurname] = useState("");
   const [department, setDepartment] = useState("");
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
 
   const departments = [
     "Departman Seçiniz",
     "Çay Ocağı",
+    "Çay Ocağı(VIP)",
     "AR-GE",
     "ÜR-GE",
     "Muhasebe"
@@ -43,16 +48,20 @@ function Form() {
     try {
       const response = await login(name, surname, department, password);
       if (response === "Login successful!") {
-        if (department === "Çay Ocağı") {
+        if (department === "Çay Ocağı" || department === "Çay Ocağı(VIP)") {
           localStorage.setItem("name", name);
           localStorage.setItem("surname", surname);
+          dispatch(changeDepartment(department))
           navigate("/receiver");
         }
         else {
-          navigate("order");
           localStorage.setItem("name", name);
           localStorage.setItem("surname", surname);
+          localStorage.setItem("department", department);
+          dispatch(changeDepartment(department));
           console.log(response)
+          console.log(department)
+          navigate("order");
         }
       }
 
