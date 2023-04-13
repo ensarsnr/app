@@ -50,7 +50,7 @@ function Receiver() {
                 name={name ? <div className='text-center'>{WELCOME_USER}{name.toUpperCase()} {surname.toUpperCase()}</div> : ""}
                 foodMenu={
                     <div className='float-end'>
-                        <Link to="foodMenu" className="text-light text-decoration-none">
+                        <Link to="/foodMenu" className="text-light text-decoration-none">
                             {FOOD_MENU}
                         </Link>
                     </div>
@@ -68,7 +68,7 @@ function Receiver() {
                 <ul style={{ display: "flex", flexDirection: "column-reverse" }} >
                     {
                         filteredData.map((e, i) => {
-                            if (department === "Çay Ocağı(VIP)") {
+                            if (localStorage.getItem("department") === "Çay Ocağı(VIP)") {
                                 if (e.user_department === "AR-GE" || e.user_department === "Muhasebe") {
                                     return (
                                         <li style={{ listStyle: "none" }} key={i}>

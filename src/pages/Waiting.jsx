@@ -26,7 +26,7 @@ function Waiting() {
                 }
                 foodMenu={
                     <div className='float-end'>
-                        <Link to="menu" className="text-light text-decoration-none">
+                        <Link to="/foodMenu" className="text-light text-decoration-none">
                             {FOOD_MENU}
                         </Link>
                     </div>

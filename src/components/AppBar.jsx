@@ -1,5 +1,6 @@
 import { Navbar } from "react-bootstrap";
 import { NAVBAR_TITLE } from "../constants/constText";
+import { Link } from "react-router-dom";
 
 
 function AppBar(props) {
@@ -8,7 +9,9 @@ function AppBar(props) {
   return (
     <Navbar expand="lg" variant="light" className="text-light" bg="dark">
       <div className="col-4 text-center">
-        <Navbar.Brand className="text-light" href="#">{NAVBAR_TITLE}</Navbar.Brand>
+        <Navbar.Brand className="text-light">
+          <Link to="/order" className="text-decoration-none text-light">{NAVBAR_TITLE}</Link>
+        </Navbar.Brand>
       </div>
       <div className="col-4">
         {props.name}

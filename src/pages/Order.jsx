@@ -31,14 +31,14 @@ function Order() {
                 }
                 foodMenu={
                     <div className='float-end'>
-                        <Link to="foodMenu" className="text-light text-decoration-none">
+                        <Link to="/foodMenu" className="text-light text-decoration-none">
                             {FOOD_MENU}
                         </Link>
                     </div>
                 }
                 myOrders={
                     <div>
-                        <Link to={"/order/waiting"} className='text-light text-decoration-none'>{MY_ORDERS}</Link>
+                        <Link to={"/waiting"} className='text-light text-decoration-none'>{MY_ORDERS}</Link>
                     </div>
                 }
             />

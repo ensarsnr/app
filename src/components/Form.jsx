@@ -55,7 +55,8 @@ function Form() {
         if (department === "Çay Ocağı" || department === "Çay Ocağı(VIP)") {
           localStorage.setItem("name", name);
           localStorage.setItem("surname", surname);
-          dispatch(changeDepartment(department))
+          localStorage.setItem("department", department);
+          dispatch(changeDepartment(department));
           navigate("/receiver");
         }
         else {

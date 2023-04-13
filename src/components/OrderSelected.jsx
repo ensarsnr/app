@@ -42,11 +42,11 @@ function OrderSelected() {
             setSuccessful(true);
             setTimeout(() => {
                 setSuccessful(false);
-                navigate("waiting");
+                navigate("/waiting");
             }, 3400);
             dispatch(removeAllItems());
             items.forEach((e, index) =>
-                selectOrder(e, localStorage.getItem("name"), String(itemCounts[e]), "Bekleniyor", department));
+                selectOrder(e, localStorage.getItem("name"), String(itemCounts[e]), "Bekleniyor", localStorage.getItem("department")));
         } else {
             setShow(true);
         }
