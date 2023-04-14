@@ -1,13 +1,22 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addItem } from '../redux/slices/itemsSlice';
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { Button } from 'react-bootstrap';
+import { HOW_COFFEE } from '../constants/constText';
+
 
 function OrderMenu() {
-    const dispatch = useDispatch();
 
+    // HOOKS
+    const [open, setOpen] = useState(false);
+    const dispatch = useDispatch();
     const [data, setData] = useState([]);
+    const deneme = useSelector((state) => state.items.count);
+    console.log(deneme);
+
 
     // Her liste elemanı için ayrı sayaçlar eklemek için bir state nesnesi kullanıyoruz.
     // const [count, setCount] = useState({});
@@ -20,22 +29,35 @@ function OrderMenu() {
         fetchData();
     }, [])
 
+
+
+
+    // Functions
+    const handleClickOpen = () => { setOpen(true); };
+    const handleClose = () => { setOpen(false); };
+
+
     const handleClick = (e) => {
-        const itemName = e.target.textContent;
 
-        // Seçilen ürünü itemsSlice dosyasındaki elements dizisine ekliyoruz.
-        dispatch(addItem(itemName));
+        if (e.target.textContent.toLowerCase() === "Türk Kahvesi".toLowerCase()) {
+            handleClickOpen();
+        }
 
-        // Tıklanan elemanın sayaç değerini bir artırıyoruz.
-        // Eğer sayaç daha önce tanımlanmamışsa, 1 değeri ile başlatıyoruz.
+        else {
 
-        // setCount(prevCount => ({
-        //     ...prevCount,
-        //     [itemName]: (prevCount[itemName] || 0) + 1
-        // }));
+            const itemName = e.target.textContent;
+            // Seçilen ürünü itemsSlice dosyasındaki elements dizisine ekliyoruz.
+            dispatch(addItem(itemName));
 
-        // Tıklanan elemanın "onClick" özelliğini kaldırıyoruz.
-        e.target.onclick = null;
+            // Tıklanan elemanın sayaç değerini bir artırıyoruz.
+            // Eğer sayaç daha önce tanımlanmamışsa, 1 değeri ile başlatıyoruz.
+
+            // setCount(prevCount => ({
+            //     ...prevCount,
+            //     [itemName]: (prevCount[itemName] || 0) + 1
+            // }));
+
+        }
     }
 
     //console.log(count) console'da gösteriyor count'un değerini
@@ -58,9 +80,25 @@ function OrderMenu() {
                             {e.name}
                         </li>
                     ))}
+
                 </ul>
             </div>
-        </div>
+            {open && (
+                <div>
+                    <Dialog open={open} onClose={handleClose}>
+                        <DialogTitle>{HOW_COFFEE}</DialogTitle>
+                        <DialogContent style={{ width: "600px" }}>
+                            <TextField />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleClose}>Cancel</Button>
+                            <Button onClick={handleClose}>Subscribe</Button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
+            )
+            }
+        </div >
     )
 }
 

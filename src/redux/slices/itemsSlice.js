@@ -5,7 +5,6 @@ export const itemsSlice = createSlice({
     initialState: {
         elements: [],
         count: 0,
-        department: "",
     },
     reducers: {
         changeDepartment: (state, action) => {

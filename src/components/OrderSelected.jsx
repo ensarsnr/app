@@ -10,8 +10,10 @@ import { useNavigate } from 'react-router';
 import { selectOrder } from '../service/service';
 
 function OrderSelected() {
-    const menuItemsLength = 4;
 
+    //selector ile buraya çekebiliriz count verisini oradan da burada gösterir database'e kaydedebiliriz.
+    // onu eve gidince düşünürsün..
+    const menuItemsLength = 4;
     const [unSuccessful, setUnSuccessful] = useState(false);
     const [successful, setSuccessful] = useState(false);
     const [show, setShow] = useState(false);
@@ -31,6 +33,7 @@ function OrderSelected() {
     };
 
     const handleSend = (e) => {
+        console.log(e.target);
         if (items.length <= 0) {
             setUnSuccessful(true);
             setTimeout(() => setUnSuccessful(false), 3900);
@@ -41,14 +44,9 @@ function OrderSelected() {
                 navigate("/waiting");
             }, 3400);
             dispatch(removeAllItems());
-            items.forEach((e, index) => {
-                if (e.toLowerCase() === "Türk Kahvesi".toLowerCase()) {
-                    console.log("Türk kahvesini seçtiğin için pop-up açılacak")
-                    return;
-                }
-                selectOrder(e, localStorage.getItem("name"), String(itemCounts[e]), "Bekleniyor", localStorage.getItem("department"));
+            items.forEach((e, index) =>
+                selectOrder(e, localStorage.getItem("name"), String(itemCounts[e]), "Bekleniyor", localStorage.getItem("department")));
 
-            })
         } else {
             setShow(true);
         }
