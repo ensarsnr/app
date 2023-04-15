@@ -2,8 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem } from '../redux/slices/itemsSlice';
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { addItem, decrement, increment, resetCount } from '../redux/slices/itemsSlice';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { Button } from 'react-bootstrap';
 import { HOW_COFFEE } from '../constants/constText';
 
@@ -12,10 +12,9 @@ function OrderMenu() {
 
     // HOOKS
     const [open, setOpen] = useState(false);
-    const dispatch = useDispatch();
     const [data, setData] = useState([]);
-    const deneme = useSelector((state) => state.items.count);
-    console.log(deneme);
+    const dispatch = useDispatch();
+    const numberValue = useSelector((state) => state.items.count);
 
 
     // Her liste elemanı için ayrı sayaçlar eklemek için bir state nesnesi kullanıyoruz.
@@ -33,10 +32,25 @@ function OrderMenu() {
 
 
     // Functions
-    const handleClickOpen = () => { setOpen(true); };
-    const handleClose = () => { setOpen(false); };
+    // const coffeeIncrement = () => {
+    //     setNumber(number + 1)
+    //     dispatch()
+    // }
+    // const coffeeDecrement = () => {
+    //     setNumber(number - 1 < 1 ? 1 : number - 1);
+    // }
 
+    let handleClickOpen = () => { setOpen(true); };
+    let handleClose = () => {
+        setOpen(false)
+        // dispatch(resetCount())
+    };
 
+    const completeCoffee = () => {
+        dispatch(addItem("Türk Kahvesi"))
+        setOpen(false);
+        // dispatch(resetCount());
+    }
     const handleClick = (e) => {
 
         if (e.target.textContent.toLowerCase() === "Türk Kahvesi".toLowerCase()) {
@@ -86,13 +100,27 @@ function OrderMenu() {
             {open && (
                 <div>
                     <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle>{HOW_COFFEE}</DialogTitle>
+                        <DialogTitle>
+                            <h1 className='text-center'>Kahve Adeti</h1>
+                        </DialogTitle>
                         <DialogContent style={{ width: "600px" }}>
-                            <TextField />
+                            <div className='row'>
+                                <div className='text-center col-6'>
+                                    <h1>Adet: {numberValue}</h1>
+                                </div>
+                                <div style={{
+                                    display: "flex",
+                                    justifyContent: "space-between"
+                                }} className='row text-center col-6'>
+                                    <Button variant='success' onClick={() => dispatch(increment())} style={{ width: "45%" }} className='col-6'>+</Button>
+                                    <Button variant='danger' onClick={() => dispatch(decrement())} style={{ width: "45%" }} className='col-6'>-</Button>
+                                </div>
+                            </div>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleClose}>Cancel</Button>
-                            <Button onClick={handleClose}>Subscribe</Button>
+                            <Button onClick={handleClose}>İptal</Button>
+                            <Button onClick={completeCoffee}>Tamamla</Button>
+                            <div id='deneme'></div>
                         </DialogActions>
                     </Dialog>
                 </div>

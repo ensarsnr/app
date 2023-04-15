@@ -18,9 +18,8 @@ function OrderSelected() {
     const [successful, setSuccessful] = useState(false);
     const [show, setShow] = useState(false);
     const [itemCounts, setItemCount] = useState({});
-
+    const coffeeCount = useSelector((state) => state.items.count);
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
     const items = useSelector((state) => state.items.elements);
 
@@ -37,6 +36,7 @@ function OrderSelected() {
         if (items.length <= 0) {
             setUnSuccessful(true);
             setTimeout(() => setUnSuccessful(false), 3900);
+
         } else if (items.length <= menuItemsLength) {
             setSuccessful(true);
             setTimeout(() => {
@@ -44,9 +44,16 @@ function OrderSelected() {
                 navigate("/waiting");
             }, 3400);
             dispatch(removeAllItems());
-            items.forEach((e, index) =>
-                selectOrder(e, localStorage.getItem("name"), String(itemCounts[e]), "Bekleniyor", localStorage.getItem("department")));
+            if (e === "Türk Kahvesi") {
+                items.forEach((e, index) => {
+                    selectOrder(e, localStorage.getItem("name"), String(coffeeCount[e]), "Bekleniyor", localStorage.getItem("department"))
+                })
+            }
+            else {
+                items.forEach((e, index) =>
+                    selectOrder(e, localStorage.getItem("name"), String(itemCounts[e]), "Bekleniyor", localStorage.getItem("department")));
 
+            }
         } else {
             setShow(true);
         }
@@ -79,32 +86,45 @@ function OrderSelected() {
                                 {e} ({itemCounts[e] || 1})
                             </div>
                             <div className="col-6 ">
-                                <span
-                                    onClick={() => decrementss(e)}
-                                    style={{
-                                        fontSize: "20px",
-                                        cursor: "pointer"
-                                    }}
-                                    className="badge rounded-pill text-dark"
-                                >
-                                    -
-                                </span>
-                                <span
-                                    className="badge rounded-pill text-dark"
-                                    onClick={() => increment(e)}
-                                    style={{
-                                        fontSize: "20px",
-                                        cursor: "pointer"
-                                    }}
-                                >
-                                    +
-                                </span>
-                                <span
-                                    onClick={() => handleDestroy(i)}
-                                    className='badge destroy rounded-pill'
-                                >
-                                    X
-                                </span>
+                                {e === "Türk Kahvesi" ? (
+                                    // Türk Kahvesi ise artış ve eksilme kısmını eklemeyin
+                                    <span
+                                        onClick={() => handleDestroy(i)}
+                                        className="badge destroy rounded-pill"
+                                    >
+                                        X
+                                    </span>
+                                ) : (
+                                    // Diğer durumlarda artış ve eksilme kısmını ekleyin
+                                    <>
+                                        <span
+                                            onClick={() => decrementss(e)}
+                                            style={{
+                                                fontSize: "20px",
+                                                cursor: "pointer"
+                                            }}
+                                            className="badge rounded-pill text-dark"
+                                        >
+                                            -
+                                        </span>
+                                        <span
+                                            className="badge rounded-pill text-dark"
+                                            onClick={() => increment(e)}
+                                            style={{
+                                                fontSize: "20px",
+                                                cursor: "pointer"
+                                            }}
+                                        >
+                                            +
+                                        </span>
+                                        <span
+                                            onClick={() => handleDestroy(i)}
+                                            className='badge destroy rounded-pill'
+                                        >
+                                            X
+                                        </span>
+                                    </>
+                                )}
                             </div>
                         </li>
                     ))}
