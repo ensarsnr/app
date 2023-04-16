@@ -8,7 +8,6 @@ import unSucces from "../assets/animation/unnsuccess.json"
 import Animations from './Animations';
 import { useNavigate } from 'react-router';
 import { selectOrder } from '../service/service';
-import { resetCount } from '../redux/slices/itemsSlice';
 
 function OrderSelected() {
 
@@ -22,6 +21,8 @@ function OrderSelected() {
     const coffeeCount = useSelector((state) => state.items.count);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const selectedCoffe = useSelector((state) => state.items.kahve);
+    console.log("SELECTED SAYFASI: ", selectedCoffe)
     const items = useSelector((state) => state.items.elements);
 
     const handleDestroy = (index) => {
@@ -32,7 +33,6 @@ function OrderSelected() {
         }));
     };
 
-    console.log(coffeeCount + " count");
 
     const handleSend = (e) => {
         console.log(e.target);
@@ -87,17 +87,20 @@ function OrderSelected() {
                             className="row list-group-item mb-1 d-flex justify-content-between align-items-center"
                         >
                             <div className="col-6">
-                                {e} {e === "Türk Kahvesi" ? (`(${coffeeCount || 1})`) : (`(${itemCounts[e] || 1})`)}
+                                {e} {
+                                    e === "Türk Kahvesi" ?
+                                        `(${coffeeCount || 1}) ${selectedCoffe}`
+                                        : (`(${itemCounts[e] || 1})`)}
                             </div>
                             <div className="col-6 ">
                                 {e === "Türk Kahvesi" ? (
                                     // Türk Kahvesi ise artış ve eksilme kısmını eklemeyin
-                                    <span
+                                    <div
                                         onClick={() => handleDestroy(i)}
                                         className="badge destroy rounded-pill"
                                     >
                                         X
-                                    </span>
+                                    </div>
                                 ) : (
                                     // Diğer durumlarda artış ve eksilme kısmını ekleyin
                                     <>

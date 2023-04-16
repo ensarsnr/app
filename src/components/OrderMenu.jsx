@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem, decrement, increment, resetCount } from '../redux/slices/itemsSlice';
+import { addItem, decrement, increment, resetCount, turkKahvesi } from '../redux/slices/itemsSlice';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { HOW_COFFEE } from '../constants/constText';
@@ -36,6 +36,13 @@ function OrderMenu() {
     const completeCoffee = () => {
         dispatch(addItem("Türk Kahvesi"))
         setOpen(false);
+        const selectedCoffees = Array.from({ length: numberValue }).map((_, i) => {
+            const selectElement = document.getElementById(`coffee-select-${i}`); // Seçili kahve çeşidini alma
+            console.log(`Kahve ${i + 1}:`, selectElement.value); // Seçilen kahve çeşidini console.log ile yazdırma
+            dispatch(turkKahvesi(selectElement.value));
+            return selectElement.value;
+        });
+        console.log("Seçilen kahve çeşitleri:", selectedCoffees); // Seçilen kahve çeşitlerini console.log ile yazdırma
     }
     const handleClick = (e) => {
 
@@ -48,6 +55,7 @@ function OrderMenu() {
             const itemName = e.target.textContent;
             // Seçilen ürünü itemsSlice dosyasındaki elements dizisine ekliyoruz.
             dispatch(addItem(itemName));
+            console.log("Seçilen Kahve çeşidi:", itemName)
         }
     }
 
@@ -78,7 +86,9 @@ function OrderMenu() {
                 <div>
                     <Dialog open={open} onClose={handleClose}>
                         <DialogTitle>
-                            <h1 className='text-center'>Kahve Adeti</h1>
+                            <div>
+                                <h2 className='text-center'>Kahve Adeti</h2>
+                            </div>
                         </DialogTitle>
                         <DialogContent style={{ width: "600px" }}>
                             <div className='row'>
@@ -93,10 +103,12 @@ function OrderMenu() {
                                     <Button variant='danger' onClick={() => dispatch(decrement())} style={{ width: "45%" }} className='col-6'>-</Button>
                                 </div>
                                 {Array.from({ length: numberValue }).map((_, i) => (
-                                    <div className='col-6'>
+                                    <div className='col-6' key={i}>
                                         <h4 className='text-center mt-2'>{i + 1}.</h4>
                                         <select
-                                            className="mt-3 form-select form-select-lg w-75 m-auto" >
+                                            className="mt-3 form-select form-select-lg w-75 m-auto"
+                                            id={`coffee-select-${i}`} // id propertysini ekleyerek her birini benzersiz hale getirme
+                                        >
                                             {coffeeChoice.map((e) => (
                                                 <option key={e}>{e}</option>
                                             ))}

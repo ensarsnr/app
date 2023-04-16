@@ -5,6 +5,7 @@ export const itemsSlice = createSlice({
     initialState: {
         elements: [],
         count: 1,
+        kahve: []
     },
     reducers: {
         changeDepartment: (state, action) => {
@@ -25,10 +26,20 @@ export const itemsSlice = createSlice({
         },
         increment: (state) => { state.count += 1 },
         decrement: (state) => { state.count = state.count - 1 < 1 ? 1 : state.count - 1 },
-        resetCount: (state) => { state.count = 1 }
+        resetCount: (state) => { state.count = 1 },
+        turkKahvesi: (state, action) => { state.kahve.push(action.payload) }
     }
 })
 
-export const { addItem, destroyItem, removeAllItems, changeDepartment, increment, decrement, resetCount } = itemsSlice.actions
+export const {
+    addItem,
+    destroyItem,
+    removeAllItems,
+    changeDepartment,
+    increment,
+    decrement,
+    resetCount,
+    turkKahvesi
+} = itemsSlice.actions
 
 export default itemsSlice.reducer
