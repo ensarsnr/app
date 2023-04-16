@@ -8,6 +8,7 @@ import unSucces from "../assets/animation/unnsuccess.json"
 import Animations from './Animations';
 import { useNavigate } from 'react-router';
 import { selectOrder } from '../service/service';
+import { resetCount } from '../redux/slices/itemsSlice';
 
 function OrderSelected() {
 
@@ -31,12 +32,13 @@ function OrderSelected() {
         }));
     };
 
+    console.log(coffeeCount + " count");
+
     const handleSend = (e) => {
         console.log(e.target);
         if (items.length <= 0) {
             setUnSuccessful(true);
             setTimeout(() => setUnSuccessful(false), 3900);
-
         } else if (items.length <= menuItemsLength) {
             setSuccessful(true);
             setTimeout(() => {
@@ -44,20 +46,22 @@ function OrderSelected() {
                 navigate("/waiting");
             }, 3400);
             dispatch(removeAllItems());
-            if (e === "Türk Kahvesi") {
-                items.forEach((e, index) => {
-                    selectOrder(e, localStorage.getItem("name"), String(coffeeCount[e]), "Bekleniyor", localStorage.getItem("department"))
-                })
-            }
-            else {
-                items.forEach((e, index) =>
-                    selectOrder(e, localStorage.getItem("name"), String(itemCounts[e]), "Bekleniyor", localStorage.getItem("department")));
 
-            }
+            items.forEach((item, index) => {
+                const itemCount = itemCounts[item] || 1;
+                if (item.toLowerCase() === "türk kahvesi".toLowerCase()) {
+                    selectOrder(item, localStorage.getItem("name"), String(coffeeCount), "Bekleniyor", localStorage.getItem("department"));
+                }
+                if (item.toLowerCase() !== "türk kahvesi".toLowerCase()) {
+                    selectOrder(item, localStorage.getItem("name"), String(itemCount), "Bekleniyor", localStorage.getItem("department"));
+                }
+            });
+
         } else {
             setShow(true);
         }
     };
+
 
     const decrementss = (e) => {
         const newItemCounts = { ...itemCounts };
@@ -83,7 +87,7 @@ function OrderSelected() {
                             className="row list-group-item mb-1 d-flex justify-content-between align-items-center"
                         >
                             <div className="col-6">
-                                {e} ({itemCounts[e] || 1})
+                                {e} {e === "Türk Kahvesi" ? (`(${coffeeCount || 1})`) : (`(${itemCounts[e] || 1})`)}
                             </div>
                             <div className="col-6 ">
                                 {e === "Türk Kahvesi" ? (
@@ -128,6 +132,7 @@ function OrderSelected() {
                             </div>
                         </li>
                     ))}
+
                 </ul>
                 <Button
                     onClick={handleSend}

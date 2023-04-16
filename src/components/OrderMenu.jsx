@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem, decrement, increment, resetCount } from '../redux/slices/itemsSlice';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { Button } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import { HOW_COFFEE } from '../constants/constText';
 
 
@@ -20,6 +20,8 @@ function OrderMenu() {
     // Her liste elemanı için ayrı sayaçlar eklemek için bir state nesnesi kullanıyoruz.
     // const [count, setCount] = useState({});
 
+    const coffeeChoice = ["Seçiniz", "Şekerli", "Orta Şekerli", "Şekersiz"]
+
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get("http://localhost:3001/products");
@@ -28,28 +30,12 @@ function OrderMenu() {
         fetchData();
     }, [])
 
-
-
-
-    // Functions
-    // const coffeeIncrement = () => {
-    //     setNumber(number + 1)
-    //     dispatch()
-    // }
-    // const coffeeDecrement = () => {
-    //     setNumber(number - 1 < 1 ? 1 : number - 1);
-    // }
-
     let handleClickOpen = () => { setOpen(true); };
-    let handleClose = () => {
-        setOpen(false)
-        // dispatch(resetCount())
-    };
+    let handleClose = () => { setOpen(false) };
 
     const completeCoffee = () => {
         dispatch(addItem("Türk Kahvesi"))
         setOpen(false);
-        // dispatch(resetCount());
     }
     const handleClick = (e) => {
 
@@ -62,15 +48,6 @@ function OrderMenu() {
             const itemName = e.target.textContent;
             // Seçilen ürünü itemsSlice dosyasındaki elements dizisine ekliyoruz.
             dispatch(addItem(itemName));
-
-            // Tıklanan elemanın sayaç değerini bir artırıyoruz.
-            // Eğer sayaç daha önce tanımlanmamışsa, 1 değeri ile başlatıyoruz.
-
-            // setCount(prevCount => ({
-            //     ...prevCount,
-            //     [itemName]: (prevCount[itemName] || 0) + 1
-            // }));
-
         }
     }
 
@@ -115,17 +92,27 @@ function OrderMenu() {
                                     <Button variant='success' onClick={() => dispatch(increment())} style={{ width: "45%" }} className='col-6'>+</Button>
                                     <Button variant='danger' onClick={() => dispatch(decrement())} style={{ width: "45%" }} className='col-6'>-</Button>
                                 </div>
+                                {Array.from({ length: numberValue }).map((_, i) => (
+                                    <div className='col-6'>
+                                        <h4 className='text-center mt-2'>{i + 1}.</h4>
+                                        <select
+                                            className="mt-3 form-select form-select-lg w-75 m-auto" >
+                                            {coffeeChoice.map((e) => (
+                                                <option key={e}>{e}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                ))}
                             </div>
+
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleClose}>İptal</Button>
                             <Button onClick={completeCoffee}>Tamamla</Button>
-                            <div id='deneme'></div>
                         </DialogActions>
                     </Dialog>
                 </div>
-            )
-            }
+            )}
         </div >
     )
 }
