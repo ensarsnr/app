@@ -22,7 +22,8 @@ export const itemsSlice = createSlice({
         },
         removeAllItems: (state) => {
             state.elements.splice(0, state.elements.length);
-            state.count = 0; // Tüm elemanlar silinince count'i sıfırlıyoruz
+            state.kahve.splice(0, state.kahve.length);
+            state.count = 1; // Tüm elemanlar silinince count'i sıfırlıyoruz
         },
         increment: (state) => { state.count += 1 },
         decrement: (state) => { state.count = state.count - 1 < 1 ? 1 : state.count - 1 },

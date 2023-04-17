@@ -2,23 +2,17 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem, decrement, increment, resetCount, turkKahvesi } from '../redux/slices/itemsSlice';
+import { addItem, decrement, increment, turkKahvesi } from '../redux/slices/itemsSlice';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { Button, ButtonGroup } from 'react-bootstrap';
-import { HOW_COFFEE } from '../constants/constText';
+import { Button } from 'react-bootstrap';
 
 
 function OrderMenu() {
-
     // HOOKS
     const [open, setOpen] = useState(false);
     const [data, setData] = useState([]);
     const dispatch = useDispatch();
     const numberValue = useSelector((state) => state.items.count);
-
-
-    // Her liste elemanı için ayrı sayaçlar eklemek için bir state nesnesi kullanıyoruz.
-    // const [count, setCount] = useState({});
 
     const coffeeChoice = ["Seçiniz", "Şekerli", "Orta Şekerli", "Şekersiz"]
 
@@ -30,8 +24,8 @@ function OrderMenu() {
         fetchData();
     }, [])
 
-    let handleClickOpen = () => { setOpen(true); };
-    let handleClose = () => { setOpen(false) };
+    const handleClickOpen = () => { setOpen(true); };
+    const handleClose = () => { setOpen(false) };
 
     const completeCoffee = () => {
         dispatch(addItem("Türk Kahvesi"))
@@ -44,20 +38,18 @@ function OrderMenu() {
         });
         console.log("Seçilen kahve çeşitleri:", selectedCoffees); // Seçilen kahve çeşitlerini console.log ile yazdırma
     }
+
     const handleClick = (e) => {
-
-        if (e.target.textContent.toLowerCase() === "Türk Kahvesi".toLowerCase()) {
+        if (e.target.textContent.toLowerCase() === "türk kahvesi") {
             handleClickOpen();
-        }
-
-        else {
-
+        } else {
             const itemName = e.target.textContent;
             // Seçilen ürünü itemsSlice dosyasındaki elements dizisine ekliyoruz.
             dispatch(addItem(itemName));
             console.log("Seçilen Kahve çeşidi:", itemName)
         }
     }
+
 
     //console.log(count) console'da gösteriyor count'un değerini
     return (

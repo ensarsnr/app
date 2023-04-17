@@ -50,7 +50,7 @@ function OrderSelected() {
             items.forEach((item, index) => {
                 const itemCount = itemCounts[item] || 1;
                 if (item.toLowerCase() === "türk kahvesi".toLowerCase()) {
-                    selectOrder(item, localStorage.getItem("name"), String(coffeeCount), "Bekleniyor", localStorage.getItem("department"));
+                    selectOrder(item, localStorage.getItem("name"), String(coffeeCount), "Bekleniyor", localStorage.getItem("department"), selectedCoffe);
                 }
                 if (item.toLowerCase() !== "türk kahvesi".toLowerCase()) {
                     selectOrder(item, localStorage.getItem("name"), String(itemCount), "Bekleniyor", localStorage.getItem("department"));

@@ -40,7 +40,7 @@ const productData = async (value) => {
   value(response.data)
 }
 
-const selectOrder = async (product_name, user_name, quantity, is_order, user_department) => {
+const selectOrder = async (product_name, user_name, quantity, is_order, user_department, select_coffee) => {
   try {
     const response = await api.post('/orders', {
       product_name: product_name,
@@ -48,6 +48,7 @@ const selectOrder = async (product_name, user_name, quantity, is_order, user_dep
       quantity: quantity,
       is_order: is_order,
       user_department: user_department,
+      select_coffee: select_coffee,
     });
     console.log(response.data);
     return response.data;
