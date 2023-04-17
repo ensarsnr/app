@@ -7,12 +7,18 @@ import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material
 import { Button } from 'react-bootstrap';
 
 
+
 function OrderMenu() {
+
     // HOOKS
     const [open, setOpen] = useState(false);
     const [data, setData] = useState([]);
     const dispatch = useDispatch();
     const numberValue = useSelector((state) => state.items.count);
+
+
+    // Her liste elemanı için ayrı sayaçlar eklemek için bir state nesnesi kullanıyoruz.
+    // const [count, setCount] = useState({});
 
     const coffeeChoice = ["Seçiniz", "Şekerli", "Orta Şekerli", "Şekersiz"]
 
@@ -24,8 +30,8 @@ function OrderMenu() {
         fetchData();
     }, [])
 
-    const handleClickOpen = () => { setOpen(true); };
-    const handleClose = () => { setOpen(false) };
+    let handleClickOpen = () => { setOpen(true); };
+    let handleClose = () => { setOpen(false) };
 
     const completeCoffee = () => {
         dispatch(addItem("Türk Kahvesi"))
@@ -38,18 +44,20 @@ function OrderMenu() {
         });
         console.log("Seçilen kahve çeşitleri:", selectedCoffees); // Seçilen kahve çeşitlerini console.log ile yazdırma
     }
-
     const handleClick = (e) => {
-        if (e.target.textContent.toLowerCase() === "türk kahvesi") {
+
+        if (e.target.textContent.toLowerCase() === "Türk Kahvesi".toLowerCase()) {
             handleClickOpen();
-        } else {
+        }
+
+        else {
+
             const itemName = e.target.textContent;
             // Seçilen ürünü itemsSlice dosyasındaki elements dizisine ekliyoruz.
             dispatch(addItem(itemName));
             console.log("Seçilen Kahve çeşidi:", itemName)
         }
     }
-
 
     //console.log(count) console'da gösteriyor count'un değerini
     return (

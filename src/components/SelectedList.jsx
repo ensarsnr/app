@@ -1,5 +1,4 @@
 
-
 // import { TextField } from '@mui/material';
 // import axios from 'axios';
 // import { useEffect, useState } from 'react';
@@ -111,15 +110,16 @@ function SelectedList() {
                                 <li style={{ listStyle: "none" }} key={i}>
                                     <div className='card mb-2'>
                                         <div
-                                            className='card-body'
+                                            className='card-body row'
                                             style={{
                                                 display: "flex",
                                                 justifyContent: "space-between"
                                             }}
                                         >
-                                            <div>{e.user_name.toUpperCase()}</div>
-                                            <div>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
-                                            <div>{new Date(e.order_date).toLocaleString()}</div>
+                                            <div className='col-4'>{e.user_name.toUpperCase()}</div>
+                                            <div className='col-4 text-center'>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
+                                            <div className='col-4' style={{ textAlign: "end" }}>{new Date(e.order_date).toLocaleString()}</div>
+                                            <div className='text-center mt-2 text-danger col-12'>{e.select_coffee}</div>
                                         </div>
                                     </div>
                                 </li>
