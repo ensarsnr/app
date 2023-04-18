@@ -18,12 +18,12 @@ function OrderSelected() {
     const [successful, setSuccessful] = useState(false);
     const [show, setShow] = useState(false);
     const [itemCounts, setItemCount] = useState({});
-    const coffeeCount = useSelector((state) => state.items.count);
     const navigate = useNavigate();
+
     const dispatch = useDispatch();
     const selectedCoffe = useSelector((state) => state.items.kahve);
-    console.log("SELECTED SAYFASI: ", selectedCoffe)
     const items = useSelector((state) => state.items.elements);
+    const coffeeCount = useSelector((state) => state.items.count);
 
     const handleDestroy = (index) => {
         dispatch(destroyItem(index));
@@ -75,8 +75,6 @@ function OrderSelected() {
         setItemCount(newItemCounts);
     };
 
-
-
     return (
         <div className="row d-flex justify-content-center">
             <div className="col-12 mt-5 w-50">
@@ -84,53 +82,30 @@ function OrderSelected() {
                     {items.map((e, i) => (
                         <li
                             key={i}
-                            className="row list-group-item mb-1 d-flex justify-content-between align-items-center"
+                            className="row list-group-item mb-1 d-flex align-items-center"
                         >
-                            <div className="col-6">
+                            <div style={{ textAlign: "start" }} className="col-10">
                                 {e} {
                                     e === "Türk Kahvesi" ?
                                         `(${coffeeCount || 1}) ${selectedCoffe}`
                                         : (`(${itemCounts[e] || 1})`)}
                             </div>
-                            <div className="col-6 ">
+                            <div className="col-2">
                                 {e === "Türk Kahvesi" ? (
                                     // Türk Kahvesi ise artış ve eksilme kısmını eklemeyin
                                     <div
-                                        onClick={() => handleDestroy(i)}
                                         className="badge destroy rounded-pill"
                                     >
-                                        X
+
+                                        <Button onClick={() => handleDestroy(i)} variant='secondary'>X</Button>
                                     </div>
                                 ) : (
                                     // Diğer durumlarda artış ve eksilme kısmını ekleyin
-                                    <>
-                                        <span
-                                            onClick={() => decrementss(e)}
-                                            style={{
-                                                fontSize: "20px",
-                                                cursor: "pointer"
-                                            }}
-                                            className="badge rounded-pill text-dark"
-                                        >
-                                            -
-                                        </span>
-                                        <span
-                                            className="badge rounded-pill text-dark"
-                                            onClick={() => increment(e)}
-                                            style={{
-                                                fontSize: "20px",
-                                                cursor: "pointer"
-                                            }}
-                                        >
-                                            +
-                                        </span>
-                                        <span
-                                            onClick={() => handleDestroy(i)}
-                                            className='badge destroy rounded-pill'
-                                        >
-                                            X
-                                        </span>
-                                    </>
+                                    <div style={{ position: "relative", right: "55px" }} class="btn-group w-100" role="group">
+                                        <button onClick={() => increment(e)} type="button" class="btn btn-secondary">+</button>
+                                        <button onClick={() => decrementss(e)} type="button" class="btn btn-secondary">-</button>
+                                        <button onClick={() => handleDestroy(i)} type="button" class="btn btn-secondary">x</button>
+                                    </div>
                                 )}
                             </div>
                         </li>
@@ -152,36 +127,40 @@ function OrderSelected() {
                     </Alert>
                 )}
             </div>
-            {successful && (
-                // Koşullu render yapma işlemi eğer showAnimation true ise ekranda göstericek,
-                // False olursa ekranda gözükmeyecek.
-                // Sipariş getirildiğinde false'a çekip kapanır hale getiricem.
-                <div
-                    style={{
-                        position: "fixed",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        width: "20%",
-                        height: ""
-                    }}>
-                    <Animations animation={success} />
-                </div>
-            )}
-            {unSuccessful && (
-                <div
-                    style={{
-                        position: "fixed",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        width: "10%",
-                        height: ""
-                    }}>
-                    <Animations animation={unSucces} />
-                </div>
-            )}
-        </div>
+            {
+                successful && (
+                    // Koşullu render yapma işlemi eğer showAnimation true ise ekranda göstericek,
+                    // False olursa ekranda gözükmeyecek.
+                    // Sipariş getirildiğinde false'a çekip kapanır hale getiricem.
+                    <div
+                        style={{
+                            position: "fixed",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            width: "20%",
+                            height: ""
+                        }}>
+                        <Animations animation={success} />
+                    </div>
+                )
+            }
+            {
+                unSuccessful && (
+                    <div
+                        style={{
+                            position: "fixed",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            width: "10%",
+                            height: ""
+                        }}>
+                        <Animations animation={unSucces} />
+                    </div>
+                )
+            }
+        </div >
     )
 }
 

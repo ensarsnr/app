@@ -20,9 +20,12 @@ export const itemsSlice = createSlice({
             const indexToDelete = action.payload;
             state.elements.splice(indexToDelete, 1);
         },
+        removeTurkishCoffe: (state) => {
+            state.kahve.splice(0, state.kahve.length);
+            state.count = 1;
+        },
         removeAllItems: (state) => {
             state.elements.splice(0, state.elements.length);
-            state.kahve.splice(0, state.kahve.length);
             state.count = 1; // Tüm elemanlar silinince count'i sıfırlıyoruz
         },
         increment: (state) => { state.count += 1 },
@@ -40,7 +43,8 @@ export const {
     increment,
     decrement,
     resetCount,
-    turkKahvesi
+    turkKahvesi,
+    removeTurkishCoffe,
 } = itemsSlice.actions
 
 export default itemsSlice.reducer
