@@ -5,13 +5,13 @@ import { EXIT_APPBAR, FOOD_MENU, LABEL_SEARCH, WELCOME_USER } from '../constants
 import { TextField } from '@mui/material'
 import axios from 'axios'
 import { Button, Container } from 'react-bootstrap'
+import { isOrder } from '../service/service'
 
 function Receiver() {
     const name = localStorage.getItem("name");
     const surname = localStorage.getItem("surname")
     const [search, setSearch] = useState("");
     const [data, setData] = useState([]);
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,7 +24,6 @@ function Receiver() {
     const handleOrderButtonClick = async (id) => {
         const newData = data.map(e => {
             if (e.id === id) {
-                // Tıklanan elemanın is_order property'sini güncelle
                 return { ...e, is_order: "Verildi" };
             } else {
                 return e;
@@ -32,7 +31,18 @@ function Receiver() {
         });
 
         setData(newData);
-    }
+
+        try {
+            const response = await axios.post('http://localhost:3001/updateOrder', {
+                id: id,
+                is_order: 'Verildi'
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.log(`Error updating order: ${error}`);
+        }
+    };
+
 
     const filteredData = data.filter(e => e.user_name.toLowerCase().includes(search.toLowerCase()));
 

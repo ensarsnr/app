@@ -19,6 +19,19 @@ const login = async (name, surname, department, password) => {
   }
 };
 
+const isOrder = async (is_order, id) => {
+  try {
+    const response = await api.post('/isActive', {
+      is_order: is_order,
+      id: id,
+    });
+    console.log(response.data)
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const register = async (name, surname, department, password, number) => {
   try {
     const response = await api.post('/register', {
@@ -60,6 +73,6 @@ const selectOrder = async (product_name, user_name, quantity, is_order, user_dep
 
 
 
-export { login, productData, selectOrder, register };
+export { login, productData, selectOrder, register, isOrder };
 
 
