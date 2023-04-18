@@ -5,7 +5,6 @@ import { EXIT_APPBAR, FOOD_MENU, LABEL_SEARCH, WELCOME_USER } from '../constants
 import { TextField } from '@mui/material'
 import axios from 'axios'
 import { Button, Container } from 'react-bootstrap'
-import { isOrder } from '../service/service'
 
 function Receiver() {
     const name = localStorage.getItem("name");

@@ -29,14 +29,14 @@ function FoodMenu() {
                 }
             />
 
-            <div className='container'>
+            <div>
                 <div className='row mt-5'>
                     <div className='col-md-4 col-sm-12 text-center'>1.Menu</div>
                     <div className='col-md-4 col-sm-12 text-center'>2.Menu</div>
                     <div className='col-md-4 col-sm-12 text-center'>3.Menu</div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
