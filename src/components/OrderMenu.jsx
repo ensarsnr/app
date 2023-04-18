@@ -8,19 +8,14 @@ import { Button } from 'react-bootstrap';
 
 
 
-function OrderMenu() {
-
-    // HOOKS
-    const [open, setOpen] = useState(false);
-    const [data, setData] = useState([]);
-    const dispatch = useDispatch();
-    const numberValue = useSelector((state) => state.items.count);
-
-
-    // Her liste elemanı için ayrı sayaçlar eklemek için bir state nesnesi kullanıyoruz.
-    // const [count, setCount] = useState({});
+const OrderMenu = () => {
 
     const coffeeChoice = ["Seçiniz", "Şekerli", "Orta Şekerli", "Şekersiz"]
+
+    const dispatch = useDispatch();
+
+    const [open, setOpen] = useState(false);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,34 +25,32 @@ function OrderMenu() {
         fetchData();
     }, [])
 
-    let handleClickOpen = () => { setOpen(true); };
-    let handleClose = () => { setOpen(false) };
+    const numberValue = useSelector((state) => state.items.count);
 
-    const completeCoffee = () => {
-        dispatch(addItem("Türk Kahvesi"))
-        setOpen(false);
-        const selectedCoffees = Array.from({ length: numberValue }).map((_, i) => {
-            const selectElement = document.getElementById(`coffee-select-${i}`); // Seçili kahve çeşidini alma
-            console.log(`Kahve ${i + 1}:`, selectElement.value); // Seçilen kahve çeşidini console.log ile yazdırma
-            dispatch(turkKahvesi(selectElement.value));
-            return selectElement.value;
-        });
-        console.log("Seçilen kahve çeşitleri:", selectedCoffees); // Seçilen kahve çeşitlerini console.log ile yazdırma
-    }
+    const handleClickOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     const handleClick = (e) => {
-
-        if (e.target.textContent.toLowerCase() === "Türk Kahvesi".toLowerCase()) {
+        const itemName = e.target.textContent;
+        if (itemName.toLowerCase() === "Türk Kahvesi".toLowerCase()) {
             handleClickOpen();
-        }
-
-        else {
-
-            const itemName = e.target.textContent;
-            // Seçilen ürünü itemsSlice dosyasındaki elements dizisine ekliyoruz.
+        } else {
             dispatch(addItem(itemName));
             console.log("Seçilen Kahve çeşidi:", itemName)
         }
     }
+
+    const completeCoffee = () => {
+        dispatch(addItem("Türk Kahvesi"))
+        setOpen(false);
+        Array.from({ length: numberValue }).map((_, i) => {
+            const selectElement = document.getElementById(`coffee-select-${i}`);
+            console.log(`Kahve ${i + 1}:`, selectElement.value);
+            dispatch(turkKahvesi(selectElement.value));
+            return selectElement.value;
+        });
+    }
+
 
     //console.log(count) console'da gösteriyor count'un değerini
     return (

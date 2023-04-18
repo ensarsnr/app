@@ -1,30 +1,25 @@
 import React, { useEffect } from 'react'
 import Lottie from 'lottie-web'
 
-// giriş yapılırken user_id aynı şekilde orders id ye atansın sonrasında
-// aynı kişi product seçerken product id si product id ye gitsin
-// içine date eklensin ne kadar alacağı falan yazsın sonrasında tamamlanıyor.
-
-
-
-
-// animasyonları kontrol etmek için yaptığım bir components
-// her component'ta bunu kullanarak animasyonlar ekleyebilirim.
+// Bu component, animasyonları kontrol etmek için kullanılır.
+// Her component'ta kullanarak animasyonlar ekleyebiliriz.
 function Animations(props) {
     useEffect(() => {
+        // Lottie.loadAnimation() fonksiyonu, animasyonu oluşturur ve bir nesne olarak döndürür.
         const anim = Lottie.loadAnimation({
-            container: document.querySelector("#ids"),
-            animationData: props.animation,
-            renderer: "svg", // "canvas", "html"
-            loop: true, // boolean
-            autoplay: true, // boolean
+            container: document.querySelector("#ids"), // animasyonun render edileceği DOM elementinin seçicisi
+            animationData: props.animation, // animasyonun JSON verisi
+            renderer: "svg", // "canvas", "html" gibi farklı render modlarından biri
+            loop: true, // animasyonun döngü yapmasını belirleyen boolean
+            autoplay: true, // animasyonun otomatik başlamasını belirleyen boolean
         });
 
-        // Clean up function to stop the animation when the component unmounts
+        // Component unmount olduğunda animasyonu durdurmak için clean-up fonksiyonu
         return () => anim.destroy();
     });
 
     return (
+        // animasyonun render edileceği div elementi
         <div>
             <div id="ids" ></div>
         </div>

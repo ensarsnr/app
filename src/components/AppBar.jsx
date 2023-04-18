@@ -1,11 +1,12 @@
 import { Navbar } from "react-bootstrap";
 import { NAVBAR_TITLE } from "../constants/constText";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
+function AppBar({ name, myOrders, foodMenu, element }) {
 
-function AppBar(props) {
-  // Klasik bir appbar boostrapten çektim css kısmını.
   // Propslar ile diğer sayfadan name menuler çıkış işlemlerini alıp burada düzenliyoruz.
+
   return (
     <Navbar expand="lg" variant="light" className="text-light" bg="dark">
       <div className="col-4 text-center">
@@ -14,25 +15,31 @@ function AppBar(props) {
         </Navbar.Brand>
       </div>
       <div className="col-4">
-        {props.name}
+        {name}
       </div>
       <div style={{
         display: "flex",
         justifyContent: "space-evenly"
       }} className="col-4">
         <div>
-          {props.myOrders}
+          {myOrders}
         </div>
         <div>
-          {props.foodMenu}
+          {foodMenu}
         </div>
         <div>
-          {props.element}
+          {element}
         </div>
       </div>
-
     </Navbar>
   );
+}
+
+AppBar.propTypes = {
+  name: PropTypes.string.isRequired,
+  myOrders: PropTypes.element.isRequired,
+  foodMenu: PropTypes.element.isRequired,
+  element: PropTypes.element.isRequired
 }
 
 export default AppBar;
