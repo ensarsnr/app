@@ -114,13 +114,21 @@ function Receiver() {
                                                         justifyContent: "space-between"
                                                     }}
                                                 >
-                                                    <div className=' col-2'>
+                                                    <div className=' col-3'>
                                                         {e.user_name.toUpperCase()}
-                                                        <div className='text-danger' >({e.user_department})</div>
+                                                        <div className='text-danger mt-3' >({e.user_department})</div>
                                                     </div>
-                                                    <div className='col-2'>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
-                                                    <div className='col-2'>{new Date(e.order_date).toLocaleString()}</div>
-                                                    <div className='col-2'>
+                                                    <div className='col-3'>
+                                                        <div className='row'>
+                                                            <div className='col-12'>
+                                                                {e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
+                                                        </div>
+                                                        <div className='col-12 mt-3 text-danger'>
+                                                            {e.select_coffee}
+                                                        </div>
+                                                    </div>
+                                                    <div className='col-3'>{new Date(e.order_date).toLocaleString()}</div>
+                                                    <div className='mt-3 col-3'>
                                                         <Button variant={
                                                             e.is_order === "Bekleniyor" ? "success" : "danger"
                                                         } className='w-100' onClick={() => handleOrderButtonClick(e.id)}>{e.is_order}</Button>
@@ -131,10 +139,7 @@ function Receiver() {
                                     )
                                 }
                             }
-                        }
-
-                        )
-                    }
+                        })}
                 </ul>
             </Container>
         </div>
