@@ -15,10 +15,13 @@ function Receiver() {
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get("http://localhost:3001/getOrders");
-            setData(response.data);
+            if (response.data !== data) {
+                setData(response.data);
+            }
         }
         fetchData();
-    }, [])
+    }, [data]);
+
 
     const handleOrderButtonClick = async (id) => {
         const newData = data.map(e => {
