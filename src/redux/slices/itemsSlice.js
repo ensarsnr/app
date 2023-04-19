@@ -5,7 +5,7 @@ export const itemsSlice = createSlice({
     initialState: {
         elements: [],
         count: 1,
-        kahve: []
+        kahve: [],
     },
     reducers: {
         changeDepartment: (state, action) => {
@@ -37,13 +37,13 @@ export const itemsSlice = createSlice({
 
 export const {
     addItem,
-    destroyItem,
-    removeAllItems,
-    changeDepartment,
     increment,
     decrement,
     resetCount,
+    destroyItem,
     turkKahvesi,
+    removeAllItems,
+    changeDepartment,
     removeTurkishCoffe,
 } = itemsSlice.actions
 

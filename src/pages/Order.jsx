@@ -27,7 +27,7 @@ function Order() {
                     </Link>
                 </div>}
                 name={
-                    <div className='text-center'>{WELCOME_USER}{name.toUpperCase()}</div>
+                    <div className='text-center'>{WELCOME_USER}: {name.toUpperCase()}</div>
                 }
                 foodMenu={
                     <div className='float-end'>

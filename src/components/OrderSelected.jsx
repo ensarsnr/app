@@ -19,11 +19,11 @@ function OrderSelected() {
     const [show, setShow] = useState(false);
     const [itemCounts, setItemCount] = useState({});
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
     const selectedCoffe = useSelector((state) => state.items.kahve);
     const items = useSelector((state) => state.items.elements);
     const coffeeCount = useSelector((state) => state.items.count);
+
 
     const handleDestroy = (index) => {
         dispatch(destroyItem(index));
@@ -101,10 +101,10 @@ function OrderSelected() {
                                     </div>
                                 ) : (
                                     // Diğer durumlarda artış ve eksilme kısmını ekleyin
-                                    <div style={{ position: "relative", right: "55px" }} class="btn-group w-100" role="group">
-                                        <button onClick={() => increment(e)} type="button" class="btn btn-secondary">+</button>
-                                        <button onClick={() => decrementss(e)} type="button" class="btn btn-secondary">-</button>
-                                        <button onClick={() => handleDestroy(i)} type="button" class="btn btn-secondary">x</button>
+                                    <div style={{ position: "relative", right: "55px" }} className="btn-group w-100" role="group">
+                                        <button onClick={() => increment(e)} type="button" className="btn btn-secondary">+</button>
+                                        <button onClick={() => decrementss(e)} type="button" className="btn btn-secondary">-</button>
+                                        <button onClick={() => handleDestroy(i)} type="button" className="btn btn-secondary">x</button>
                                     </div>
                                 )}
                             </div>
