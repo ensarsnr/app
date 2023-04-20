@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
 import { COMPLETED_ORDER_BUTTON, LIMITED_ERROR } from '../constants/constText';
-import { decrementCount, denemeCikarma, destroyItem, incrementCount, removeAllItems, removeTurkishCoffe } from '../redux/slices/itemsSlice';
+import { decrementCount, destroyItem, incrementCount, removeAllItems, removeTurkishCoffe } from '../redux/slices/itemsSlice';
 import success from "../assets/animation/111541-successful-tick.json"
 import unSucces from "../assets/animation/unnsuccess.json"
 import Animations from './Animations';

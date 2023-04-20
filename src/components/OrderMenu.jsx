@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem, decrement, increment, turkKahvesi } from '../redux/slices/itemsSlice';
+import { addItem, decrement, increment, incrementCount, turkKahvesi } from '../redux/slices/itemsSlice';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { Button } from 'react-bootstrap';
 
@@ -36,9 +36,11 @@ const OrderMenu = () => {
             handleClickOpen();
         } else {
             dispatch(addItem(itemName));
-            console.log("Seçilen Kahve çeşidi:", itemName)
+            console.log("Seçilen Kahve çeşidi:", itemName);
+            dispatch(incrementCount({ item: itemName }));
         }
-    }
+    };
+
 
     const completeCoffee = () => {
 
@@ -48,8 +50,6 @@ const OrderMenu = () => {
 
             if (selectElement.value === "Seçiniz") {
                 console.log("BOş geçme")
-
-
             } else {
                 dispatch(addItem("Türk Kahvesi"))
                 setOpen(false);
