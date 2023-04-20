@@ -6,6 +6,7 @@ export const itemsSlice = createSlice({
         elements: [],
         count: 1,
         kahve: [],
+        counts: {},
     },
     reducers: {
         changeDepartment: (state, action) => {
@@ -26,8 +27,17 @@ export const itemsSlice = createSlice({
         },
         removeAllItems: (state) => {
             state.elements.splice(0, state.elements.length);
-            state.count = 1; // Tüm elemanlar silinince count'i sıfırlıyoruz
+            state.count = 1;
         },
+        incrementCount: (state, action) => {
+            const { item } = action.payload;
+            state.counts[item] = state.counts[item] ? state.counts[item] + 1 : 1;
+        },
+        decrementCount: (state, action) => {
+            const { item } = action.payload;
+            state.counts[item] = state.counts[item] ? state.counts[item] - 1 : 0;
+        },
+
         increment: (state) => { state.count += 1 },
         decrement: (state) => { state.count = state.count - 1 < 1 ? 1 : state.count - 1 },
         resetCount: (state) => { state.count = 1 },
@@ -45,6 +55,9 @@ export const {
     removeAllItems,
     changeDepartment,
     removeTurkishCoffe,
+    incrementCount,
+    decrementCount,
+
 } = itemsSlice.actions
 
 export default itemsSlice.reducer

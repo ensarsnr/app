@@ -9,11 +9,14 @@ import "../Deneme.css"
 
 function Order() {
     const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
 
     useEffect(() => {
         const storedName = localStorage.getItem('name');
+        const storedSurname = localStorage.getItem('surname');
         if (storedName) {
             setName(storedName);
+            setSurname(storedSurname);
         }
     }, []);
 
@@ -27,7 +30,7 @@ function Order() {
                     </Link>
                 </div>}
                 name={
-                    <div className='text-center'>{WELCOME_USER}: {name.toUpperCase()}</div>
+                    <div className='text-center'>{WELCOME_USER} {name.toUpperCase()} {surname.toUpperCase()}</div>
                 }
                 foodMenu={
                     <div className='float-end'>

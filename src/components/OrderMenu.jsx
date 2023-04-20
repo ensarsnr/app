@@ -41,13 +41,24 @@ const OrderMenu = () => {
     }
 
     const completeCoffee = () => {
-        dispatch(addItem("Türk Kahvesi"))
-        setOpen(false);
+
         Array.from({ length: numberValue }).map((_, i) => {
             const selectElement = document.getElementById(`coffee-select-${i}`);
-            console.log(`Kahve ${i + 1}:`, selectElement.value);
-            dispatch(turkKahvesi(selectElement.value));
-            return selectElement.value;
+
+
+            if (selectElement.value === "Seçiniz") {
+                console.log("BOş geçme")
+
+
+            } else {
+                dispatch(addItem("Türk Kahvesi"))
+                setOpen(false);
+                console.log(`Kahve ${i + 1}:`, selectElement.value);
+                dispatch(turkKahvesi(selectElement.value));
+                return selectElement.value;
+            }
+
+
         });
     }
 
