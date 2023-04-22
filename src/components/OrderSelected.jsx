@@ -26,6 +26,9 @@ function OrderSelected() {
 
 
     const handleSend = (e) => {
+        // disable the button
+        e.target.disabled = true;
+
         console.log(e.target);
         if (items.length <= 0) {
             setUnSuccessful(true);
@@ -35,6 +38,9 @@ function OrderSelected() {
             setTimeout(() => {
                 setSuccessful(false);
                 navigate("/waiting");
+
+                // enable the button after page has loaded
+                e.target.disabled = false;
             }, 3400);
             dispatch(removeAllItems());
 
@@ -44,14 +50,14 @@ function OrderSelected() {
                     selectOrder(
                         item,
                         localStorage.getItem("name"),
-                        String(coffeeCount), "Bekleniyor",
+                        String(coffeeCount),
+                        "Bekleniyor",
                         localStorage.getItem("department"),
                         selectedCoffe
                     )
-                        .then(response => console.log(response))
-                        .catch(error => console.error(error));
-                }
-                else {
+                        .then((response) => console.log(response))
+                        .catch((error) => console.error(error));
+                } else {
                     for (let i = 1; i <= itemCount; i++) {
                         selectOrder(
                             item,
@@ -60,16 +66,14 @@ function OrderSelected() {
                             "Bekleniyor",
                             localStorage.getItem("department")
                         )
-                            .then(response => console.log(response))
-                            .catch(error => console.error(error));
+                            .then((response) => console.log(response))
+                            .catch((error) => console.error(error));
                     }
                 }
             });
-
         } else {
             setShow(true);
         }
-
     };
 
 
@@ -122,9 +126,9 @@ function OrderSelected() {
                                 ) : (
                                     // Diğer durumlarda artış ve eksilme kısmını ekleyin
                                     <div style={{ position: "relative", right: "55px" }} className="btn-group w-100" role="group">
-                                        <button onClick={() => handleIncrement(e)} type="button" className="btn btn-secondary">+</button>
-                                        <button onClick={() => handleDecrement(e)} type="button" className="btn btn-secondary">-</button>
-                                        <button onClick={() => handleDestroy(i)} type="button" className="btn btn-secondary">x</button>
+                                        <button onClick={() => handleIncrement(e)} type="button" className="btn btn-light">+</button>
+                                        <button onClick={() => handleDecrement(e)} type="button" className="btn btn-light">-</button>
+                                        <button onClick={() => handleDestroy(i)} type="button" className="btn btn-light border">x</button>
                                     </div>
                                 )}
                             </div>
