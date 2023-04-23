@@ -5,14 +5,17 @@ import { Container } from 'react-bootstrap';
 import { LABEL_SEARCH } from '../constants/constText';
 
 function SelectedList() {
+    // State variables for storing data and search query
     const [data, setData] = useState([]);
     const [search, setSearch] = useState("");
     const name = localStorage.getItem("name");
 
+    // Fetch data from API on component mount
     useEffect(() => {
         fetchData();
-    }, [])
+    }, []);
 
+    // Function to fetch data from API
     const fetchData = async () => {
         try {
             const response = await axios.get("http://localhost:3001/getOrders");
@@ -22,6 +25,7 @@ function SelectedList() {
         }
     }
 
+    // Function to filter data based on search query and user name
     const filterData = (arr, query) => {
         return arr.filter(el =>
             el.product_name.toLowerCase().includes(query.toLowerCase())
@@ -29,8 +33,10 @@ function SelectedList() {
         );
     }
 
+    // Filter data based on search query and user name
     const filteredData = filterData(data, search);
 
+    // Function to render filtered data as a list
     const renderData = () => {
         return filteredData.map((e, i) => (
             <li style={{ listStyle: "none" }} key={i}>

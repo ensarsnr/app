@@ -6,44 +6,52 @@ import { decrementCount, destroyItem, incrementCount, removeAllItems, removeTurk
 import success from "../assets/animation/111541-successful-tick.json"
 import unSucces from "../assets/animation/unnsuccess.json"
 import Animations from './Animations';
-import { useNavigate } from 'react-router';
 import { selectOrder } from '../service/service';
+import { useNavigate } from 'react-router';
 
 function OrderSelected() {
 
+
     const menuItemsLength = 4;
+
     const [unSuccessful, setUnSuccessful] = useState(false);
     const [successful, setSuccessful] = useState(false);
     const [show, setShow] = useState(false);
     const [itemCounts, setItemCount] = useState({});
+
+    // Hooks
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const selectedCoffe = useSelector((state) => state.items.kahve);
     const items = useSelector((state) => state.items.elements);
     const coffeeCount = useSelector((state) => state.items.count);
     const countElemen = useSelector((state) => state.items.counts);
+    const allItemCounts = useSelector((state) => state.items.counts);
 
-
-
+    // Send button click handler
     const handleSend = (e) => {
-        // disable the button
         e.target.disabled = true;
 
         console.log(e.target);
+
         if (items.length <= 0) {
+            // If there are no items in the cart
             setUnSuccessful(true);
-            setTimeout(() => setUnSuccessful(false), 3900);
+            setTimeout(() => {
+                setUnSuccessful(false)
+                e.target.disabled = false;
+            }, 3900);
         } else if (items.length <= menuItemsLength) {
+            // If there are items in the cart and they are not more than the limit
             setSuccessful(true);
             setTimeout(() => {
                 setSuccessful(false);
                 navigate("/waiting");
-
-                // enable the button after page has loaded
                 e.target.disabled = false;
             }, 3400);
             dispatch(removeAllItems());
 
+            // Send each item to the server
             items.forEach((item, index) => {
                 const itemCount = itemCounts[item] || 1;
                 if (item.toLowerCase() === "türk kahvesi".toLowerCase()) {
@@ -72,13 +80,12 @@ function OrderSelected() {
                 }
             });
         } else {
+            // If there are too many items in the cart
             setShow(true);
         }
     };
 
-
-    const allItemCounts = useSelector((state) => state.items.counts);
-
+    // Destroy button click handler
     const handleDestroy = (index) => {
         dispatch(removeTurkishCoffe());
         dispatch(destroyItem(index));
@@ -88,17 +95,22 @@ function OrderSelected() {
         }));
     };
 
-
+    // Increment button click handler
     const handleIncrement = (item) => {
         dispatch(incrementCount({ item }));
     };
 
+    // Decrement button click handler
     const handleDecrement = (item) => {
         dispatch(decrementCount({ item }));
     };
+
+    // Side effect
     useEffect(() => {
-        // redux store'da değişiklik olduğunda yapılacak işlemler buraya yazılabilir.
-    }, [items, allItemCounts])
+        // Code to run after render
+    }, [items, allItemCounts]);
+
+    // Render component
     return (
         <div className="row d-flex justify-content-center">
             <div className="col-12 mt-5 w-50">
@@ -116,7 +128,6 @@ function OrderSelected() {
                             </div>
                             <div className="col-2">
                                 {e === "Türk Kahvesi" ? (
-                                    // Türk Kahvesi ise artış ve eksilme kısmını eklemeyin
                                     <div
                                         className="badge destroy rounded-pill"
                                     >
@@ -124,11 +135,28 @@ function OrderSelected() {
                                         <Button onClick={() => handleDestroy(i)} variant='secondary'>X</Button>
                                     </div>
                                 ) : (
-                                    // Diğer durumlarda artış ve eksilme kısmını ekleyin
                                     <div style={{ position: "relative", right: "55px" }} className="btn-group w-100" role="group">
-                                        <button onClick={() => handleIncrement(e)} type="button" className="btn btn-light">+</button>
-                                        <button onClick={() => handleDecrement(e)} type="button" className="btn btn-light">-</button>
-                                        <button onClick={() => handleDestroy(i)} type="button" className="btn btn-light border">x</button>
+                                        <button
+                                            onClick={() => handleIncrement(e)}
+                                            type="button"
+                                            className="btn btn-light"
+                                        >
+                                            +
+                                        </button>
+                                        <button
+                                            onClick={() => handleDecrement(e)}
+                                            type="button"
+                                            className="btn btn-light"
+                                        >
+                                            -
+                                        </button>
+                                        <button
+                                            onClick={() => handleDestroy(i)}
+                                            type="button"
+                                            className="btn btn-light border"
+                                        >
+                                            x
+                                        </button>
                                     </div>
                                 )}
                             </div>

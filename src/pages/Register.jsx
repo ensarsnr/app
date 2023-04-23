@@ -9,57 +9,63 @@ import { EXT_NUMBER } from '../constants/constText';
 
 function Register() {
 
-    // giriş yapıldığında giriş yapıldı gibisinden bi animasyon eklenebilir.
-    // true olduğunda gözzükür bir süre sonra false döner...
+    // State hook for displaying error messages to the user
     const [error, setError] = useState("");
 
-
+    // `useNavigate` hook from `react-router-dom` for navigating to a different page
     const navigate = useNavigate();
 
+    // State hooks for managing form input fields
     const [name, setName] = useState("");
     const [department, setDepartment] = useState("");
     const [surname, setSurname] = useState("");
     const [password, setPassword] = useState("");
     const [number, setNumber] = useState("");
 
+    // List of department options for the dropdown
     const departments = [
-        "Departman Seçiniz",
-        "Çay Ocağı",
-        "Çay Ocağı(VIP)",
-        "AR-GE",
-        "ÜR-GE",
-        "Muhasebe"
-    ]
+        "Select Department",
+        "Tea Kitchen",
+        "Tea Kitchen(VIP)",
+        "R&D",
+        "P&D",
+        "Accounting"
+    ];
 
+    // Function for displaying error messages to the user
     const errorsMessage = (message) => {
         const errorMessage = document.createElement('p');
         errorMessage.style.color = 'red';
-        setError(message)
-        document.getElementById('form').appendChild(errorMessage)
-    }
+        setError(message);
+        document.getElementById('form').appendChild(errorMessage);
+    };
 
-
+    // Function that is called when the user clicks the "Register" button
     const handleClick = async () => {
+        // Check if any of the required input fields are empty
         if (!name || !surname || !department || !password || !number) {
-            errorsMessage(EMPTY_ERROR)
+            errorsMessage(EMPTY_ERROR);
             return;
         }
 
-
         try {
+            // Call the `register` function with the input field values
             const response = await register(name, surname, department, password, number);
             if (response === "OK") {
-                navigate("/")
+                // If the registration is successful, navigate to the home page
+                navigate("/");
             } else if (response === "registered") {
-                errorsMessage(REGISTERED_ERROR)
+                // If the user is already registered, display an error message
+                errorsMessage(REGISTERED_ERROR);
             }
             else {
-                errorsMessage(WRONG_ERROR)
+                // If there is some other error, display an error message
+                errorsMessage(WRONG_ERROR);
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
+    };
 
 
 

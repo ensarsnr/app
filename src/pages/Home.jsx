@@ -3,7 +3,7 @@ import { Container, Row } from 'react-bootstrap'
 import Form from '../components/Form'
 import '../App.css';
 import Animations from '../components/Animations';
-import kettle from "../assets/animation/kettle.json"
+import kettle from "../assets/animation/office.json"
 
 function Home() {
     return (
@@ -13,7 +13,10 @@ function Home() {
                     <div className='col-md-5 mt-5 col-sm-12'>
                         <Form />
                     </div>
-                    <div className=' text-center col-md-7 col-sm-12'>
+                    <div style={{
+                        position: "relative",
+                        top: "90px",
+                    }} className='text-center col-md-7 col-sm-12'>
                         <div>
                             <Animations animation={kettle} />
                         </div>

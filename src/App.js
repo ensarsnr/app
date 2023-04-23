@@ -7,7 +7,6 @@ import FoodMenu from "./pages/FoodMenu";
 import Waiting from "./pages/Waiting";
 import Register from "./pages/Register";
 
-//routerlar ile sayfalar arası geçişleri buradan ayarlıyoruz.
 function App() {
   return (
     <>
@@ -26,14 +25,3 @@ function App() {
 }
 
 export default App;
-
-// <Link
-//       to={`/?brand=${brand}`}
-//       {...props}
-//       style={{
-//         ...props.style,
-//         color: isActive ? "red" : "black",
-//       }}
-//     >
-//       {children}
-//     </Link>

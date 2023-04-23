@@ -78,7 +78,6 @@ function Login() {
 
   return (
     <Paper elevation={1} style={{ marginTop: "50px" }} className="text-center w-75">
-      {/* Kağıt bileşeni içinde bir kırmızı arka planlı bir kağıt bileşeni bulunur */}
       <Paper elevation={3} sx={{
         background: "red",
         width: "70%",

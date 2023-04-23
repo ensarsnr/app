@@ -7,11 +7,15 @@ import axios from 'axios'
 import { Button, Container } from 'react-bootstrap'
 
 function Receiver() {
+    // Getting user's name and surname from local storage
     const name = localStorage.getItem("name");
-    const surname = localStorage.getItem("surname")
+    const surname = localStorage.getItem("surname");
+
+    // Setting up state for search bar and data fetching
     const [search, setSearch] = useState("");
     const [data, setData] = useState([]);
 
+    // Fetching data from backend and updating state
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get("http://localhost:3001/getOrders");
@@ -22,7 +26,7 @@ function Receiver() {
         fetchData();
     }, [data]);
 
-
+    // Updating is_order field of the selected order in the backend
     const handleOrderButtonClick = async (id) => {
         const newData = data.map(e => {
             if (e.id === id) {
@@ -45,8 +49,9 @@ function Receiver() {
         }
     };
 
-
+    // Filtering data based on search input
     const filteredData = data.filter(e => e.user_name.toLowerCase().includes(search.toLowerCase()));
+
 
     return (
         <div>
