@@ -77,22 +77,21 @@ function Login() {
 
 
   return (
-    <Paper elevation={1} style={{ marginTop: "50px" }} className="text-center w-75">
+    <Paper elevation={1} style={{ marginTop: "50px", height: "500px" }} className="text-center w-75">
       <Paper elevation={3} sx={{
         background: "red",
         width: "70%",
         margin: "auto",
         position: "relative",
         bottom: "20px",
-        borderRadius: "10px"
-
+        borderRadius: "10px",
       }}>
         <h2 className='pt-2 p-3 text-center text-light'>{ENTER_SITE}</h2>
       </Paper>
       {/* Form */}
       <form id='form' className="text-center">
         {/* Ad girdi alanı */}
-        <div className="p-1">
+        <div className="p-1 mt-3">
           <TextField
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -102,7 +101,7 @@ function Login() {
           />
         </div>
         {/* Soyad girdi alanı */}
-        <div className="p-1">
+        <div className="p-1 mt-3">
           <TextField
             value={surname}
             onChange={(e) => setSurname(e.target.value)}
@@ -112,7 +111,7 @@ function Login() {
           />
         </div>
         {/* Şifre girdi alanı */}
-        <div className='p-1'>
+        <div className='p-1 mt-3'>
           <TextField
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -123,7 +122,7 @@ function Login() {
           />
         </div>
         {/* Bölüm seçimi */}
-        <div className="p-1">
+        <div className="p-1 mt-3">
           <select
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
@@ -134,7 +133,7 @@ function Login() {
           </select>
         </div>
         {/* Giriş butonu */}
-        <div className="p-1 text-center w-100">
+        <div className="p-1 mt-3 text-center w-100">
           <Button onClick={handleClick} variant="warning" className="w-75">
             <span className='text-dark'>{LOGIN_BUTTON}</span>
           </Button>

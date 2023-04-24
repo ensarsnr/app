@@ -27,3 +27,4 @@ export const WRONG_ERROR = "Girdiğiniz bilgiler yanlış."
 export const WAITING_ORDER = "Lütfen siparişinizi bekleyiniz..."
 export const ORDER_LINK = "Sipariş"
 export const HOW_COFFEE = "Kahven nasıl olsun?";
+export const NUMBER_OF_COFFEES = "Kahve Adedi"

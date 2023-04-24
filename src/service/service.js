@@ -37,6 +37,19 @@ const isOrder = async (is_order, id) => {
   }
 }
 
+// function for deleted order item
+const deleteOrderItem = async (id) => {
+  try {
+    // make a post request to the '/deleteOrders' endpoint with user data
+    const response = await api.post('/deleteOrders', {
+      id: id,
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // function for user registration
 const register = async (name, surname, department, password, number) => {
   try {
@@ -81,4 +94,4 @@ const selectOrder = async (product_name, user_name, quantity, is_order, user_dep
 };
 
 // export the functions to be used in other modules
-export { login, productData, selectOrder, register, isOrder };
+export { login, productData, selectOrder, register, isOrder, deleteOrderItem };

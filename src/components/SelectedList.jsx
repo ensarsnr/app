@@ -1,8 +1,9 @@
 import { TextField } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { LABEL_SEARCH } from '../constants/constText';
+import { deleteOrderItem } from '../service/service';
 
 function SelectedList() {
     // State variables for storing data and search query
@@ -14,6 +15,17 @@ function SelectedList() {
     useEffect(() => {
         fetchData();
     }, []);
+
+
+    const deleteData = async (id) => {
+        try {
+            await deleteOrderItem(id);
+            fetchData();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     // Function to fetch data from API
     const fetchData = async () => {
@@ -48,10 +60,13 @@ function SelectedList() {
                             justifyContent: "space-between"
                         }}
                     >
-                        <div className='col-4'>{e.user_name.toUpperCase()}</div>
-                        <div className='col-4 text-center'>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
-                        <div className='col-4' style={{ textAlign: "end" }}>{new Date(e.order_date).toLocaleString()}</div>
-                        <div className='text-center mt-2 text-danger col-12'>{e.select_coffee}</div>
+                        <div className='col-3'>{e.user_name.toUpperCase()}</div>
+                        <div className='col-3 text-center'>{e.quantity === "undefined" ? 1 : e.quantity} adet {e.product_name}</div>
+                        <div className='col-3' style={{ textAlign: "end" }}>{new Date(e.order_date).toLocaleString()}</div>
+                        <div className='col-3 text-end'>
+                            <Button variant="danger w-75 p-2" onClick={() => deleteData(e.id)}>İptal</Button>
+                        </div>
+                        <div className='text-end mt-2 text-danger col-5'>{e.select_coffee}</div>
                     </div>
                 </div>
             </li>

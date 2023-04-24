@@ -91,7 +91,7 @@ const OrderMenu = () => {
                     <Dialog open={open} onClose={handleClose}>
                         <DialogTitle>
                             <div>
-                                <h2 className='text-center'>Kahve Adeti</h2>
+                                <h2 className='text-center'>{ }</h2>
                             </div>
                         </DialogTitle>
                         <DialogContent style={{ width: "600px" }}>
