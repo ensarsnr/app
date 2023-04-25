@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './pages/Home';
-import Order from './pages/Order'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "./pages/Home";
+import Order from "./pages/Order";
 import Receiver from "./pages/Receiver";
 import FoodMenu from "./pages/FoodMenu";
 import Waiting from "./pages/Waiting";
