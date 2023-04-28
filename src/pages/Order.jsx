@@ -12,7 +12,6 @@ import {
   MY_ORDERS,
   WELCOME_USER,
 } from "../constants/constText";
-import "../Deneme.css";
 import "../App.css";
 
 function Order() {

@@ -15,7 +15,6 @@ function Home() {
           <div className="col-md-5 mt-5 col-sm-12">
             <Form />
           </div>
-          +
           <div
             style={{
               position: "relative",
